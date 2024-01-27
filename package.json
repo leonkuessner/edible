@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "prisma": "^5.8.1"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.1",
+    "postgres": "^3.4.3"
+  }
+}
