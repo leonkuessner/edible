@@ -1,0 +1,212 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-py"
+  output = "../server/prisma"
+  recursive_type_depth = -1
+  interface = "sync"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Profile {
+  id String @id @default(uuid())
+  email String @unique @db.Text
+  username String @unique @db.Text
+  imageUrl String? @db.Text
+  public Boolean @default(false)
+
+  followsFollowing Follow[] @relation("following")
+  followsFollowed Follow[] @relation("followed")
+
+  posts Post[]
+  postTags PostTag[]
+  members Member[]
+  comments Comment[]
+  postLikes PostLike[]
+  commentLikes CommentLike[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+
+  @@map("profile")
+}
+
+model Follow {
+  id String @id @default(uuid())
+
+  following Profile @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
+  followingId String
+
+  followed Profile @relation("followed", fields: [followedId], references: [id], onDelete: Cascade)
+  followedId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+
+  @@map("follow")
+}
+
+enum MealType {
+  BREAKFAST
+  LUNCH
+  DINNER
+}
+
+model Post {
+  id String @id @default(uuid())
+  individual Boolean
+  meal MealType
+
+  restaurant Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  restaurantId String
+
+  group Group? @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  groupId String?
+
+  profile Profile? @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId String?
+
+  comments Comment[]
+  likes PostLike[]
+
+  postTags PostTag[]
+  postImages PostImage[]
+
+  review String @db.Text
+  rating Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+
+  @@map("post")
+}
+
+model PostTag {
+  id String @id @default(uuid())
+
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId String
+
+  profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+
+  @@map("post_tag")
+}
+
+model PostImage {
+  id String @id @default(uuid())
+
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId String
+
+  imageUrl String @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+
+  @@map("post_image")
+}
+
+model Group {
+  id String @id @default(uuid())
+  name String @db.Text
+  description String @db.Text
+
+  members Member[]
+  posts Post[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+
+  @@map("group")
+}
+
+model Member {
+  id String @id @default(uuid())
+
+  profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId String
+
+  group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  groupId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+
+  @@map("member")
+}
+
+model Comment {
+  id String @id @default(uuid())
+  message String @db.Text
+
+  replies Comment[] @relation("parent")
+  likes CommentLike[]
+
+  parent Comment? @relation("parent", fields: [parentId], references: [id], onDelete: Cascade)
+  parentId String?
+
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId String
+
+  profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+
+  @@map("comment")
+}
+
+model PostLike {
+  id String @id @default(uuid())
+
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId String
+
+  profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+
+  @@map("post_like")
+}
+
+model CommentLike {
+  id String @id @default(uuid())
+
+  comment Comment @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  commentId String
+
+  profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+
+  @@map("comment_like")
+}
+
+model Restaurant {
+  id String @id @default(uuid())
+
+  name String @db.Text
+  yelpId String @unique @db.Text
+
+  latitude String @db.Text
+  longitude String @db.Text
+
+  posts Post[]
+
+  @@map("restaurant")
+}
