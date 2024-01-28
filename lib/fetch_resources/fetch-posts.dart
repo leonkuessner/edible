@@ -12,7 +12,7 @@ import 'dart:async';
 import 'package:testing_flutter/models/model.dart';
 
 Future<List<Post>> fetch_posts() async {
-  var res = await get(Uri.parse('http://localhost:5000/posts'));
+  var res = await get(Uri.parse('http://localhost:8000/posts'));
   if (res.statusCode == 200){
     try{
     var json = jsonDecode(res.body) as List<Post>;
