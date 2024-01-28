@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_auth_ui/supabase_auth_ui.dart';
 import 'package:testing_flutter/login.dart';
-import 'package:testing_flutter/widgets/navigation/nav.dart';
 
 Future<void> main() async {
   await dotenv.load();
@@ -21,7 +20,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
         title: "edible.",
-        // home: LoginScreen(),
-        home: NavPage());
+        home: LoginScreen());
+        // home: NavPage());
   }
 }
