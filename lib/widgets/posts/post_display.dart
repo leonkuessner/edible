@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:http/http.dart';
+import 'package:like_button/like_button.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:testing_flutter/models/model.dart';
 import 'package:testing_flutter/widgets/restaurants/restaurant_info_card.dart';
@@ -17,6 +19,32 @@ class PostDisplay extends StatefulWidget {
 
 class _PostDisplayState extends State<PostDisplay> {
   bool showInfoCard = false;
+
+  Future<bool> onLikeButtonTapped(bool isLiked) async {
+    /// send your request here
+    // final bool success= await sendRequest();
+    if (isLiked) {
+      // widget.post.likes!.remove(widget.post.profileId);
+      try {
+        await post(Uri.parse(
+            "http://localhost:8000/likes?postId=${widget.post.id}&profileId=${widget.post.profileId}"));
+      } catch (e) {
+        rethrow;
+      }
+    } else {
+      try {
+        await delete(Uri.parse(
+            "http://localhost:8000/likes?postId=${widget.post.id}&profileId=${widget.post.profileId}"));
+      } catch (e) {
+        rethrow;
+      }
+    }
+
+    /// if failed, you can do nothing
+    // return success? !isLiked:isLiked;
+
+    return !isLiked;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -239,13 +267,50 @@ class _PostDisplayState extends State<PostDisplay> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Icon(
-                              MdiIcons.heart,
-                              size: 24,
-                              color: const Color(0xFF55190E),
+                            LikeButton(
+                              size: 26,
+                              circleColor: CircleColor(
+                                  start: Colors.orange[200]!,
+                                  end: const Color.fromRGBO(255, 243, 234, 1)),
+                              bubblesColor: const BubblesColor(
+                                dotPrimaryColor: Color(0xFF55190E),
+                                dotSecondaryColor: Color(0xFF55190E),
+                              ),
+                              likeBuilder: (bool isLiked) {
+                                return Icon(
+                                  isLiked
+                                      ? MdiIcons.heart
+                                      : MdiIcons.heartOutline,
+                                  color: const Color(0xFF55190E),
+                                  size: 26,
+                                );
+                              },
+                              onTap: (isLiked) => onLikeButtonTapped(isLiked),
+                              likeCount: post.likes != null
+                                  ? post.likes!.toList().length
+                                  : 0,
+                              countBuilder:
+                                  (int? count, bool isLiked, String text) {
+                                var color = const Color(0xFF55190E);
+                                Widget result;
+                                if (count == 0) {
+                                  result = Text(
+                                    "0",
+                                    style: TextStyle(color: color),
+                                  );
+                                } else {
+                                  result = Text(
+                                    text,
+                                    style: TextStyle(color: color),
+                                  );
+                                }
+                                return result;
+                              },
                             ),
-                            const SizedBox(width: 8),
+                            const SizedBox(width: 4),
                             Icon(
                               MdiIcons.commentOutline,
                               size: 24,
@@ -260,21 +325,21 @@ class _PostDisplayState extends State<PostDisplay> {
                             const SizedBox(width: 6),
                           ],
                         ),
-                        Row(
-                          children: [
-                            const SizedBox(width: 2),
-                            Text(
-                              post.likes != null
-                                  ? "${post.likes!.toList().length} ${post.likes!.toList().length == 1 ? "like" : "likes"}}"
-                                  : "0 likes",
-                              style: const TextStyle(
-                                fontSize: 14,
-                                color: Color(0xFF55190E),
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        )
+                        // Row(
+                        //   children: [
+                        //     const SizedBox(width: 2),
+                        //     Text(
+                        //       post.likes != null
+                        //           ? "${post.likes!.toList().length} ${post.likes!.toList().length == 1 ? "like" : "likes"}}"
+                        //           : "0 likes",
+                        //       style: const TextStyle(
+                        //         fontSize: 14,
+                        //         color: Color(0xFF55190E),
+                        //         fontWeight: FontWeight.bold,
+                        //       ),
+                        //     ),
+                        //   ],
+                        // )
                       ]),
                 ),
                 const Divider(
