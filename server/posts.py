@@ -8,7 +8,9 @@ import pydantic
 
 class Posts(Resource):
     def get(self):
+        print(request.args)
         params = request.args.to_dict() or {}
+        print(params)
         db = Client()
         db.connect()
         response = db.post.find_many(
@@ -17,16 +19,8 @@ class Posts(Resource):
                 {
                     'createdAt': 'desc'
                 }
-            ],
-            include = {
-                'postImages': True,
-                'comments': True,
-                'profile': True,
-                'restaurant': True
-            }
+            ]
         )
-        # res = [dict(item) for item in response]
-        # print(jsonify([res.__dict__ for res in response]))
         db.disconnect()
         if response is None:
             return {}

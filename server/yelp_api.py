@@ -37,9 +37,11 @@ def search_url(params):
         params: All the commands from the GET request
     Returns: A filtered json for BASIC data
     '''
+    print("y")
     url_params = {key: value.replace(' ', '+') for key, value in params.items()}
     url_params.setdefault('limit', SEARCH_LIMIT)
-    return request(API_HOST, SEARCH_PATH, API_KEY, url_params=url_params)
+    x = request(API_HOST, SEARCH_PATH, API_KEY, url_params=url_params)
+    return x
 
 
 
@@ -71,6 +73,17 @@ def get_business(business_id):
 
     return {key: pydash.get(res, key) for key in keys}
     # return res
+
+def search(params):
+    
+    res = search_url(params)['businesses']
+    print(res)
+    '''
+    Filtering to be done, lets clear it up later
+    '''
+    keys = ['coordinates', 'id']
+    # return [{key: value for key, value in d.items() if key in keys} for d in res]
+    return res
 
 def main():
     pass
