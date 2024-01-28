@@ -1521,6 +1521,7 @@ class ProfileWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -1552,6 +1553,9 @@ class ProfileWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final _i1.PrismaUnion<_i2.BoolFilter, bool>? public;
 
+  final _i1.PrismaUnion<_i2.StringNullableFilter,
+      _i1.PrismaUnion<String, _i1.PrismaNull>>? bio;
+
   final _i1.PrismaUnion<_i2.DateTimeFilter, DateTime>? createdAt;
 
   final _i1.PrismaUnion<_i2.DateTimeFilter, DateTime>? updatedAt;
@@ -1582,6 +1586,7 @@ class ProfileWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -1606,6 +1611,7 @@ class ProfileWhereUniqueInput
     this.NOT,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -1637,6 +1643,9 @@ class ProfileWhereUniqueInput
 
   final _i1.PrismaUnion<_i2.BoolFilter, bool>? public;
 
+  final _i1.PrismaUnion<_i2.StringNullableFilter,
+      _i1.PrismaUnion<String, _i1.PrismaNull>>? bio;
+
   final _i1.PrismaUnion<_i2.DateTimeFilter, DateTime>? createdAt;
 
   final _i1.PrismaUnion<_i2.DateTimeFilter, DateTime>? updatedAt;
@@ -1667,6 +1676,7 @@ class ProfileWhereUniqueInput
         'NOT': NOT,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -1846,6 +1856,7 @@ class ProfileOrderByWithRelationInput
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -1867,6 +1878,8 @@ class ProfileOrderByWithRelationInput
   final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? imageUrl;
 
   final _i2.SortOrder? public;
+
+  final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? bio;
 
   final _i2.SortOrder? createdAt;
 
@@ -1895,6 +1908,7 @@ class ProfileOrderByWithRelationInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -4834,6 +4848,7 @@ class ProfileSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -4856,6 +4871,8 @@ class ProfileSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
   final bool? imageUrl;
 
   final bool? public;
+
+  final bool? bio;
 
   final bool? createdAt;
 
@@ -4887,6 +4904,7 @@ class ProfileSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -4907,6 +4925,7 @@ enum ProfileScalar<T> implements _i1.PrismaEnum, _i1.Reference<T> {
   username<String>('username', 'Profile'),
   imageUrl<String>('imageUrl', 'Profile'),
   public<bool>('public', 'Profile'),
+  bio<String>('bio', 'Profile'),
   createdAt<DateTime>('createdAt', 'Profile'),
   updatedAt<DateTime>('updatedAt', 'Profile');
 
@@ -5080,6 +5099,7 @@ class ProfileCreateWithoutPostTagsInput
     required this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -5100,6 +5120,8 @@ class ProfileCreateWithoutPostTagsInput
   final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
 
   final bool? public;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? bio;
 
   final DateTime? createdAt;
 
@@ -5126,6 +5148,7 @@ class ProfileCreateWithoutPostTagsInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -6911,6 +6934,7 @@ class ProfileUncheckedCreateWithoutPostTagsInput
     required this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -6931,6 +6955,8 @@ class ProfileUncheckedCreateWithoutPostTagsInput
   final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
 
   final bool? public;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? bio;
 
   final DateTime? createdAt;
 
@@ -6960,6 +6986,7 @@ class ProfileUncheckedCreateWithoutPostTagsInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -7341,6 +7368,7 @@ class ProfileCreateWithoutCommentsInput
     required this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -7361,6 +7389,8 @@ class ProfileCreateWithoutCommentsInput
   final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
 
   final bool? public;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? bio;
 
   final DateTime? createdAt;
 
@@ -7387,6 +7417,7 @@ class ProfileCreateWithoutCommentsInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -7531,6 +7562,7 @@ class ProfileUncheckedCreateWithoutCommentsInput
     required this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -7551,6 +7583,8 @@ class ProfileUncheckedCreateWithoutCommentsInput
   final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
 
   final bool? public;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? bio;
 
   final DateTime? createdAt;
 
@@ -7580,6 +7614,7 @@ class ProfileUncheckedCreateWithoutCommentsInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -7830,6 +7865,7 @@ class ProfileCreateWithoutPostLikesInput
     required this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -7850,6 +7886,8 @@ class ProfileCreateWithoutPostLikesInput
   final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
 
   final bool? public;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? bio;
 
   final DateTime? createdAt;
 
@@ -7876,6 +7914,7 @@ class ProfileCreateWithoutPostLikesInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -7896,6 +7935,7 @@ class ProfileUncheckedCreateWithoutPostLikesInput
     required this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -7916,6 +7956,8 @@ class ProfileUncheckedCreateWithoutPostLikesInput
   final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
 
   final bool? public;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? bio;
 
   final DateTime? createdAt;
 
@@ -7945,6 +7987,7 @@ class ProfileUncheckedCreateWithoutPostLikesInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -8434,6 +8477,7 @@ class ProfileCreateWithoutCommentLikesInput
     required this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -8454,6 +8498,8 @@ class ProfileCreateWithoutCommentLikesInput
   final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
 
   final bool? public;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? bio;
 
   final DateTime? createdAt;
 
@@ -8480,6 +8526,7 @@ class ProfileCreateWithoutCommentLikesInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -8500,6 +8547,7 @@ class ProfileUncheckedCreateWithoutCommentLikesInput
     required this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -8520,6 +8568,8 @@ class ProfileUncheckedCreateWithoutCommentLikesInput
   final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
 
   final bool? public;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? bio;
 
   final DateTime? createdAt;
 
@@ -8548,6 +8598,7 @@ class ProfileUncheckedCreateWithoutCommentLikesInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -9317,6 +9368,7 @@ class ProfileCreateWithoutPostsInput
     required this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -9337,6 +9389,8 @@ class ProfileCreateWithoutPostsInput
   final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
 
   final bool? public;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? bio;
 
   final DateTime? createdAt;
 
@@ -9363,6 +9417,7 @@ class ProfileCreateWithoutPostsInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -9383,6 +9438,7 @@ class ProfileUncheckedCreateWithoutPostsInput
     required this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -9403,6 +9459,8 @@ class ProfileUncheckedCreateWithoutPostsInput
   final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
 
   final bool? public;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? bio;
 
   final DateTime? createdAt;
 
@@ -9432,6 +9490,7 @@ class ProfileUncheckedCreateWithoutPostsInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -9720,6 +9779,7 @@ class ProfileCreateWithoutFollowsFollowingInput
     required this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowed,
@@ -9740,6 +9800,8 @@ class ProfileCreateWithoutFollowsFollowingInput
   final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
 
   final bool? public;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? bio;
 
   final DateTime? createdAt;
 
@@ -9766,6 +9828,7 @@ class ProfileCreateWithoutFollowsFollowingInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowed': followsFollowed,
@@ -9786,6 +9849,7 @@ class ProfileUncheckedCreateWithoutFollowsFollowingInput
     required this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowed,
@@ -9806,6 +9870,8 @@ class ProfileUncheckedCreateWithoutFollowsFollowingInput
   final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
 
   final bool? public;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? bio;
 
   final DateTime? createdAt;
 
@@ -9834,6 +9900,7 @@ class ProfileUncheckedCreateWithoutFollowsFollowingInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowed': followsFollowed,
@@ -9956,6 +10023,7 @@ class ProfileCreateWithoutMembersInput
     required this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -9976,6 +10044,8 @@ class ProfileCreateWithoutMembersInput
   final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
 
   final bool? public;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? bio;
 
   final DateTime? createdAt;
 
@@ -10002,6 +10072,7 @@ class ProfileCreateWithoutMembersInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -10022,6 +10093,7 @@ class ProfileUncheckedCreateWithoutMembersInput
     required this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -10042,6 +10114,8 @@ class ProfileUncheckedCreateWithoutMembersInput
   final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
 
   final bool? public;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? bio;
 
   final DateTime? createdAt;
 
@@ -10071,6 +10145,7 @@ class ProfileUncheckedCreateWithoutMembersInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -10520,6 +10595,7 @@ class ProfileCreateWithoutFollowsFollowedInput
     required this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -10540,6 +10616,8 @@ class ProfileCreateWithoutFollowsFollowedInput
   final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
 
   final bool? public;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? bio;
 
   final DateTime? createdAt;
 
@@ -10566,6 +10644,7 @@ class ProfileCreateWithoutFollowsFollowedInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -10586,6 +10665,7 @@ class ProfileUncheckedCreateWithoutFollowsFollowedInput
     required this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -10606,6 +10686,8 @@ class ProfileUncheckedCreateWithoutFollowsFollowedInput
   final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
 
   final bool? public;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? bio;
 
   final DateTime? createdAt;
 
@@ -10634,6 +10716,7 @@ class ProfileUncheckedCreateWithoutFollowsFollowedInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -10756,6 +10839,7 @@ class ProfileCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
     required this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -10777,6 +10861,8 @@ class ProfileCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
 
   final bool? public;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? bio;
 
   final DateTime? createdAt;
 
@@ -10805,6 +10891,7 @@ class ProfileCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -10826,6 +10913,7 @@ class ProfileUncheckedCreateInput
     required this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -10847,6 +10935,8 @@ class ProfileUncheckedCreateInput
   final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
 
   final bool? public;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? bio;
 
   final DateTime? createdAt;
 
@@ -10878,6 +10968,7 @@ class ProfileUncheckedCreateInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -10908,6 +10999,7 @@ class ProfileCreateManyInput
     required this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
   });
@@ -10922,6 +11014,8 @@ class ProfileCreateManyInput
 
   final bool? public;
 
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? bio;
+
   final DateTime? createdAt;
 
   final DateTime? updatedAt;
@@ -10933,6 +11027,7 @@ class ProfileCreateManyInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
       };
@@ -11165,6 +11260,7 @@ class ProfileUpdateWithoutPostTagsInput
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -11188,6 +11284,11 @@ class ProfileUpdateWithoutPostTagsInput
           _i1.PrismaNull>>? imageUrl;
 
   final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? public;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? bio;
 
   final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
       createdAt;
@@ -11216,6 +11317,7 @@ class ProfileUpdateWithoutPostTagsInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -14181,6 +14283,7 @@ class ProfileUncheckedUpdateWithoutPostTagsInput
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -14204,6 +14307,11 @@ class ProfileUncheckedUpdateWithoutPostTagsInput
           _i1.PrismaNull>>? imageUrl;
 
   final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? public;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? bio;
 
   final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
       createdAt;
@@ -14235,6 +14343,7 @@ class ProfileUncheckedUpdateWithoutPostTagsInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -14858,6 +14967,7 @@ class ProfileUpdateWithoutCommentsInput
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -14881,6 +14991,11 @@ class ProfileUpdateWithoutCommentsInput
           _i1.PrismaNull>>? imageUrl;
 
   final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? public;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? bio;
 
   final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
       createdAt;
@@ -14909,6 +15024,7 @@ class ProfileUpdateWithoutCommentsInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -15092,6 +15208,7 @@ class ProfileUncheckedUpdateWithoutCommentsInput
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -15115,6 +15232,11 @@ class ProfileUncheckedUpdateWithoutCommentsInput
           _i1.PrismaNull>>? imageUrl;
 
   final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? public;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? bio;
 
   final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
       createdAt;
@@ -15146,6 +15268,7 @@ class ProfileUncheckedUpdateWithoutCommentsInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -15538,6 +15661,7 @@ class ProfileUpdateWithoutPostLikesInput
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -15561,6 +15685,11 @@ class ProfileUpdateWithoutPostLikesInput
           _i1.PrismaNull>>? imageUrl;
 
   final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? public;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? bio;
 
   final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
       createdAt;
@@ -15589,6 +15718,7 @@ class ProfileUpdateWithoutPostLikesInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -15609,6 +15739,7 @@ class ProfileUncheckedUpdateWithoutPostLikesInput
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -15632,6 +15763,11 @@ class ProfileUncheckedUpdateWithoutPostLikesInput
           _i1.PrismaNull>>? imageUrl;
 
   final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? public;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? bio;
 
   final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
       createdAt;
@@ -15663,6 +15799,7 @@ class ProfileUncheckedUpdateWithoutPostLikesInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -16410,6 +16547,7 @@ class ProfileUpdateWithoutCommentLikesInput
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -16433,6 +16571,11 @@ class ProfileUpdateWithoutCommentLikesInput
           _i1.PrismaNull>>? imageUrl;
 
   final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? public;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? bio;
 
   final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
       createdAt;
@@ -16461,6 +16604,7 @@ class ProfileUpdateWithoutCommentLikesInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -16481,6 +16625,7 @@ class ProfileUncheckedUpdateWithoutCommentLikesInput
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -16504,6 +16649,11 @@ class ProfileUncheckedUpdateWithoutCommentLikesInput
           _i1.PrismaNull>>? imageUrl;
 
   final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? public;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? bio;
 
   final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
       createdAt;
@@ -16534,6 +16684,7 @@ class ProfileUncheckedUpdateWithoutCommentLikesInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -17688,6 +17839,7 @@ class ProfileUpdateWithoutPostsInput
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -17711,6 +17863,11 @@ class ProfileUpdateWithoutPostsInput
           _i1.PrismaNull>>? imageUrl;
 
   final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? public;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? bio;
 
   final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
       createdAt;
@@ -17739,6 +17896,7 @@ class ProfileUpdateWithoutPostsInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -17759,6 +17917,7 @@ class ProfileUncheckedUpdateWithoutPostsInput
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -17782,6 +17941,11 @@ class ProfileUncheckedUpdateWithoutPostsInput
           _i1.PrismaNull>>? imageUrl;
 
   final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? public;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? bio;
 
   final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
       createdAt;
@@ -17813,6 +17977,7 @@ class ProfileUncheckedUpdateWithoutPostsInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -18255,6 +18420,7 @@ class ProfileUpdateWithoutFollowsFollowingInput
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowed,
@@ -18278,6 +18444,11 @@ class ProfileUpdateWithoutFollowsFollowingInput
           _i1.PrismaNull>>? imageUrl;
 
   final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? public;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? bio;
 
   final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
       createdAt;
@@ -18306,6 +18477,7 @@ class ProfileUpdateWithoutFollowsFollowingInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowed': followsFollowed,
@@ -18326,6 +18498,7 @@ class ProfileUncheckedUpdateWithoutFollowsFollowingInput
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowed,
@@ -18349,6 +18522,11 @@ class ProfileUncheckedUpdateWithoutFollowsFollowingInput
           _i1.PrismaNull>>? imageUrl;
 
   final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? public;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? bio;
 
   final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
       createdAt;
@@ -18379,6 +18557,7 @@ class ProfileUncheckedUpdateWithoutFollowsFollowingInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowed': followsFollowed,
@@ -18598,6 +18777,7 @@ class ProfileUpdateWithoutMembersInput
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -18621,6 +18801,11 @@ class ProfileUpdateWithoutMembersInput
           _i1.PrismaNull>>? imageUrl;
 
   final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? public;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? bio;
 
   final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
       createdAt;
@@ -18649,6 +18834,7 @@ class ProfileUpdateWithoutMembersInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -18669,6 +18855,7 @@ class ProfileUncheckedUpdateWithoutMembersInput
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -18692,6 +18879,11 @@ class ProfileUncheckedUpdateWithoutMembersInput
           _i1.PrismaNull>>? imageUrl;
 
   final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? public;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? bio;
 
   final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
       createdAt;
@@ -18723,6 +18915,7 @@ class ProfileUncheckedUpdateWithoutMembersInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -19421,6 +19614,7 @@ class ProfileUpdateWithoutFollowsFollowedInput
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -19444,6 +19638,11 @@ class ProfileUpdateWithoutFollowsFollowedInput
           _i1.PrismaNull>>? imageUrl;
 
   final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? public;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? bio;
 
   final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
       createdAt;
@@ -19472,6 +19671,7 @@ class ProfileUpdateWithoutFollowsFollowedInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -19492,6 +19692,7 @@ class ProfileUncheckedUpdateWithoutFollowsFollowedInput
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -19515,6 +19716,11 @@ class ProfileUncheckedUpdateWithoutFollowsFollowedInput
           _i1.PrismaNull>>? imageUrl;
 
   final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? public;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? bio;
 
   final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
       createdAt;
@@ -19545,6 +19751,7 @@ class ProfileUncheckedUpdateWithoutFollowsFollowedInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -19763,6 +19970,7 @@ class ProfileUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -19787,6 +19995,11 @@ class ProfileUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
           _i1.PrismaNull>>? imageUrl;
 
   final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? public;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? bio;
 
   final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
       createdAt;
@@ -19817,6 +20030,7 @@ class ProfileUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -19838,6 +20052,7 @@ class ProfileUncheckedUpdateInput
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -19862,6 +20077,11 @@ class ProfileUncheckedUpdateInput
           _i1.PrismaNull>>? imageUrl;
 
   final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? public;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? bio;
 
   final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
       createdAt;
@@ -19895,6 +20115,7 @@ class ProfileUncheckedUpdateInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'followsFollowing': followsFollowing,
@@ -19916,6 +20137,7 @@ class ProfileUpdateManyMutationInput
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
   });
@@ -19933,6 +20155,11 @@ class ProfileUpdateManyMutationInput
 
   final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? public;
 
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? bio;
+
   final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
       createdAt;
 
@@ -19946,6 +20173,7 @@ class ProfileUpdateManyMutationInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
       };
@@ -19959,6 +20187,7 @@ class ProfileUncheckedUpdateManyInput
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
   });
@@ -19976,6 +20205,11 @@ class ProfileUncheckedUpdateManyInput
 
   final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? public;
 
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? bio;
+
   final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
       createdAt;
 
@@ -19989,6 +20223,7 @@ class ProfileUncheckedUpdateManyInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
       };
@@ -20001,6 +20236,7 @@ class ProfileCountAggregateOutputType {
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.$all,
@@ -20013,6 +20249,7 @@ class ProfileCountAggregateOutputType {
         username: json['username'],
         imageUrl: json['imageUrl'],
         public: json['public'],
+        bio: json['bio'],
         createdAt: json['createdAt'],
         updatedAt: json['updatedAt'],
         $all: json['_all'],
@@ -20028,6 +20265,8 @@ class ProfileCountAggregateOutputType {
 
   final int? public;
 
+  final int? bio;
+
   final int? createdAt;
 
   final int? updatedAt;
@@ -20042,6 +20281,7 @@ class ProfileMinAggregateOutputType {
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
   });
@@ -20053,6 +20293,7 @@ class ProfileMinAggregateOutputType {
         username: json['username'],
         imageUrl: json['imageUrl'],
         public: json['public'],
+        bio: json['bio'],
         createdAt: json['createdAt'],
         updatedAt: json['updatedAt'],
       );
@@ -20066,6 +20307,8 @@ class ProfileMinAggregateOutputType {
   final String? imageUrl;
 
   final bool? public;
+
+  final String? bio;
 
   final DateTime? createdAt;
 
@@ -20079,6 +20322,7 @@ class ProfileMaxAggregateOutputType {
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
   });
@@ -20090,6 +20334,7 @@ class ProfileMaxAggregateOutputType {
         username: json['username'],
         imageUrl: json['imageUrl'],
         public: json['public'],
+        bio: json['bio'],
         createdAt: json['createdAt'],
         updatedAt: json['updatedAt'],
       );
@@ -20104,6 +20349,8 @@ class ProfileMaxAggregateOutputType {
 
   final bool? public;
 
+  final String? bio;
+
   final DateTime? createdAt;
 
   final DateTime? updatedAt;
@@ -20116,6 +20363,7 @@ class ProfileGroupByOutputType {
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.$count,
@@ -20130,6 +20378,7 @@ class ProfileGroupByOutputType {
         username: json['username'],
         imageUrl: json['imageUrl'],
         public: json['public'],
+        bio: json['bio'],
         createdAt: json['createdAt'],
         updatedAt: json['updatedAt'],
         $count: json['_count'] is Map
@@ -20153,6 +20402,8 @@ class ProfileGroupByOutputType {
 
   final bool? public;
 
+  final String? bio;
+
   final DateTime? createdAt;
 
   final DateTime? updatedAt;
@@ -20172,6 +20423,7 @@ class ProfileCountOrderByAggregateInput
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
   });
@@ -20186,6 +20438,8 @@ class ProfileCountOrderByAggregateInput
 
   final _i2.SortOrder? public;
 
+  final _i2.SortOrder? bio;
+
   final _i2.SortOrder? createdAt;
 
   final _i2.SortOrder? updatedAt;
@@ -20197,6 +20451,7 @@ class ProfileCountOrderByAggregateInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
       };
@@ -20210,6 +20465,7 @@ class ProfileMaxOrderByAggregateInput
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
   });
@@ -20224,6 +20480,8 @@ class ProfileMaxOrderByAggregateInput
 
   final _i2.SortOrder? public;
 
+  final _i2.SortOrder? bio;
+
   final _i2.SortOrder? createdAt;
 
   final _i2.SortOrder? updatedAt;
@@ -20235,6 +20493,7 @@ class ProfileMaxOrderByAggregateInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
       };
@@ -20248,6 +20507,7 @@ class ProfileMinOrderByAggregateInput
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
   });
@@ -20262,6 +20522,8 @@ class ProfileMinOrderByAggregateInput
 
   final _i2.SortOrder? public;
 
+  final _i2.SortOrder? bio;
+
   final _i2.SortOrder? createdAt;
 
   final _i2.SortOrder? updatedAt;
@@ -20273,6 +20535,7 @@ class ProfileMinOrderByAggregateInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
       };
@@ -20286,6 +20549,7 @@ class ProfileOrderByWithAggregationInput
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.$count,
@@ -20302,6 +20566,8 @@ class ProfileOrderByWithAggregationInput
   final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? imageUrl;
 
   final _i2.SortOrder? public;
+
+  final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? bio;
 
   final _i2.SortOrder? createdAt;
 
@@ -20320,6 +20586,7 @@ class ProfileOrderByWithAggregationInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         '_count': $count,
@@ -20844,6 +21111,7 @@ class ProfileScalarWhereWithAggregatesInput
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
   });
@@ -20867,6 +21135,9 @@ class ProfileScalarWhereWithAggregatesInput
 
   final _i1.PrismaUnion<_i2.BoolWithAggregatesFilter, bool>? public;
 
+  final _i1.PrismaUnion<_i2.StringNullableWithAggregatesFilter,
+      _i1.PrismaUnion<String, _i1.PrismaNull>>? bio;
+
   final _i1.PrismaUnion<_i2.DateTimeWithAggregatesFilter, DateTime>? createdAt;
 
   final _i1.PrismaUnion<_i2.DateTimeWithAggregatesFilter, DateTime>? updatedAt;
@@ -20881,6 +21152,7 @@ class ProfileScalarWhereWithAggregatesInput
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
       };
@@ -20894,6 +21166,7 @@ class ProfileCountAggregateOutputTypeSelect
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.$all,
@@ -20909,6 +21182,8 @@ class ProfileCountAggregateOutputTypeSelect
 
   final bool? public;
 
+  final bool? bio;
+
   final bool? createdAt;
 
   final bool? updatedAt;
@@ -20922,6 +21197,7 @@ class ProfileCountAggregateOutputTypeSelect
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         '_all': $all,
@@ -20946,6 +21222,7 @@ class ProfileMinAggregateOutputTypeSelect
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
   });
@@ -20960,6 +21237,8 @@ class ProfileMinAggregateOutputTypeSelect
 
   final bool? public;
 
+  final bool? bio;
+
   final bool? createdAt;
 
   final bool? updatedAt;
@@ -20971,6 +21250,7 @@ class ProfileMinAggregateOutputTypeSelect
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
       };
@@ -20994,6 +21274,7 @@ class ProfileMaxAggregateOutputTypeSelect
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
   });
@@ -21008,6 +21289,8 @@ class ProfileMaxAggregateOutputTypeSelect
 
   final bool? public;
 
+  final bool? bio;
+
   final bool? createdAt;
 
   final bool? updatedAt;
@@ -21019,6 +21302,7 @@ class ProfileMaxAggregateOutputTypeSelect
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
       };
@@ -21042,6 +21326,7 @@ class ProfileGroupByOutputTypeSelect
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.$count,
@@ -21058,6 +21343,8 @@ class ProfileGroupByOutputTypeSelect
   final bool? imageUrl;
 
   final bool? public;
+
+  final bool? bio;
 
   final bool? createdAt;
 
@@ -21076,6 +21363,7 @@ class ProfileGroupByOutputTypeSelect
         'username': username,
         'imageUrl': imageUrl,
         'public': public,
+        'bio': bio,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         '_count': $count,

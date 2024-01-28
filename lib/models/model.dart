@@ -1,13 +1,11 @@
 library prisma.namespace.model; // ignore_for_file: no_leading_underscores_for_library_prefixes
 
 import 'package:orm/orm.dart' as _i2;
-import 'package:intl/intl.dart';
 
 import 'model.dart' as _i1;
 import 'prisma.dart' as _i3;
 
-typedef ProfData = (Profile,(int,int));
-
+typedef ProfData = (Profile, (int, int));
 
 class Follow {
   const Follow({
@@ -24,10 +22,8 @@ class Follow {
         id: json['id'],
         followingId: json['followingId'],
         followedId: json['followedId'],
-        createdAt: DateFormat("E, dd MMM yyyy HH:mm:ss 'GMT'")
-            .parse(json['createdAt']),
-        updatedAt: DateFormat("E, dd MMM yyyy HH:mm:ss 'GMT'")
-            .parse(json['updatedAt']),
+        createdAt: json['createdAt'],
+        updatedAt: json['updatedAt'],
         following: json['following'] is Map
             ? _i1.Profile.fromJson(json['following'])
             : null,
@@ -116,10 +112,8 @@ class Member {
         id: json['id'],
         profileId: json['profileId'],
         groupId: json['groupId'],
-        createdAt: DateFormat("E, dd MMM yyyy HH:mm:ss 'GMT'")
-            .parse(json['createdAt']),
-        updatedAt: DateFormat("E, dd MMM yyyy HH:mm:ss 'GMT'")
-            .parse(json['updatedAt']),
+        createdAt: json['createdAt'],
+        updatedAt: json['updatedAt'],
         profile: json['profile'] is Map
             ? _i1.Profile.fromJson(json['profile'])
             : null,
@@ -157,10 +151,8 @@ class Group {
         id: json['id'],
         name: json['name'],
         description: json['description'],
-        createdAt: DateFormat("E, dd MMM yyyy HH:mm:ss 'GMT'")
-            .parse(json['createdAt']),
-        updatedAt: DateFormat("E, dd MMM yyyy HH:mm:ss 'GMT'")
-            .parse(json['updatedAt']),
+        createdAt: json['createdAt'],
+        updatedAt: json['updatedAt'],
         members: (json['members'] as Iterable?)
             ?.map((json) => _i1.Member.fromJson(json)),
         posts: (json['posts'] as Iterable?)
@@ -202,10 +194,8 @@ class CommentLike {
         id: json['id'],
         commentId: json['commentId'],
         profileId: json['profileId'],
-        createdAt: DateFormat("E, dd MMM yyyy HH:mm:ss 'GMT'")
-            .parse(json['createdAt']),
-        updatedAt: DateFormat("E, dd MMM yyyy HH:mm:ss 'GMT'")
-            .parse(json['updatedAt']),
+        createdAt: json['createdAt'],
+        updatedAt: json['updatedAt'],
         comment: json['comment'] is Map
             ? _i1.Comment.fromJson(json['comment'])
             : null,
@@ -252,10 +242,8 @@ class Comment {
         parentId: json['parentId'],
         postId: json['postId'],
         profileId: json['profileId'],
-        createdAt: DateFormat("E, dd MMM yyyy HH:mm:ss 'GMT'")
-            .parse(json['createdAt']),
-        updatedAt: DateFormat("E, dd MMM yyyy HH:mm:ss 'GMT'")
-            .parse(json['updatedAt']),
+        createdAt: json['createdAt'],
+        updatedAt: json['updatedAt'],
         replies: (json['replies'] as Iterable?)
             ?.map((json) => _i1.Comment.fromJson(json)),
         likes: (json['likes'] as Iterable?)
@@ -313,10 +301,8 @@ class PostLike {
         id: json['id'],
         postId: json['postId'],
         profileId: json['profileId'],
-        createdAt: DateFormat("E, dd MMM yyyy HH:mm:ss 'GMT'")
-            .parse(json['createdAt']),
-        updatedAt: DateFormat("E, dd MMM yyyy HH:mm:ss 'GMT'")
-            .parse(json['updatedAt']),
+        createdAt: json['createdAt'],
+        updatedAt: json['updatedAt'],
         post: json['post'] is Map ? _i1.Post.fromJson(json['post']) : null,
         profile: json['profile'] is Map
             ? _i1.Profile.fromJson(json['profile'])
@@ -353,10 +339,8 @@ class PostTag {
         id: json['id'],
         postId: json['postId'],
         profileId: json['profileId'],
-        createdAt: DateFormat("E, dd MMM yyyy HH:mm:ss 'GMT'")
-            .parse(json['createdAt']),
-        updatedAt: DateFormat("E, dd MMM yyyy HH:mm:ss 'GMT'")
-            .parse(json['updatedAt']),
+        createdAt: json['createdAt'],
+        updatedAt: json['updatedAt'],
         post: json['post'] is Map ? _i1.Post.fromJson(json['post']) : null,
         profile: json['profile'] is Map
             ? _i1.Profile.fromJson(json['profile'])
@@ -392,10 +376,8 @@ class PostImage {
         id: json['id'],
         postId: json['postId'],
         imageUrl: json['imageUrl'],
-        createdAt: DateFormat("E, dd MMM yyyy HH:mm:ss 'GMT'")
-            .parse(json['createdAt']),
-        updatedAt: DateFormat("E, dd MMM yyyy HH:mm:ss 'GMT'")
-            .parse(json['updatedAt']),
+        createdAt: json['createdAt'],
+        updatedAt: json['updatedAt'],
         post: json['post'] is Map ? _i1.Post.fromJson(json['post']) : null,
       );
 
@@ -445,10 +427,8 @@ class Post {
         profileId: json['profileId'],
         review: json['review'],
         rating: json['rating'],
-        createdAt: DateFormat("E, dd MMM yyyy HH:mm:ss 'GMT'")
-            .parse(json['createdAt']),
-        updatedAt: DateFormat("E, dd MMM yyyy HH:mm:ss 'GMT'")
-            .parse(json['updatedAt']),
+        createdAt: json['createdAt'],
+        updatedAt: json['updatedAt'],
         restaurant: json['restaurant'] is Map
             ? _i1.Restaurant.fromJson(json['restaurant'])
             : null,
@@ -513,6 +493,7 @@ class Profile {
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -532,10 +513,9 @@ class Profile {
         username: json['username'],
         imageUrl: json['imageUrl'],
         public: json['public'],
-        createdAt: DateFormat("E, dd MMM yyyy HH:mm:ss 'GMT'")
-            .parse(json['createdAt']),
-        updatedAt: DateFormat("E, dd MMM yyyy HH:mm:ss 'GMT'")
-            .parse(json['updatedAt']),
+        bio: json['bio'],
+        createdAt: json['createdAt'],
+        updatedAt: json['updatedAt'],
         followsFollowing: (json['followsFollowing'] as Iterable?)
             ?.map((json) => _i1.Follow.fromJson(json)),
         followsFollowed: (json['followsFollowed'] as Iterable?)
@@ -566,6 +546,8 @@ class Profile {
   final String? imageUrl;
 
   final bool? public;
+
+  final String? bio;
 
   final DateTime? createdAt;
 
