@@ -4,6 +4,7 @@ import pprint
 import requests
 from urllib.parse import quote
 import pydash
+from flask import abort
 
 
 API_KEY= 'x97eD7KK0A1KgmzDQgnEfMAR7FdEDhqyvw_QcWfo_TsoFlyzZvujR6B-zCFgQMPVU9Ymqj9kKiUkVw-JXOeqfYodNaXDpoz9lYHFHJJAQ3L8N0IYNIJ3YxQLSyGwZXYx'
@@ -25,9 +26,10 @@ def request(host, path, api_key, url_params=None):
     }
 
     print(u'Querying {0} ...'.format(url))
-
-    response = requests.request('GET', url, headers=headers, params=url_params)
-
+    try:
+        response = requests.request('GET', url, headers=headers, params=url_params)
+    except Exception as e:
+        abort(400, e)
     return response.json()
 
 

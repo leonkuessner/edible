@@ -40,8 +40,8 @@ Calls take way too long - need a way to improve
 #                             'postId': '9247449d-235b-4805-94e5-e2d41fb44c29'}),
 #            headers={'Content-Type': 'application/json'}
 #         )
-db8 = get('http://localhost:8000/comments?postId=9247449d-235b-4805-94e5-e2d41fb44c29')
-db9 = delete('http://localhost:8000/comments?id=1e3e29ba-935a-425a-914b-7d32d8e5c3fc')
-db10 = get('http://localhost:8000/comments?postId=9247449d-235b-4805-94e5-e2d41fb44c29')
+# db8 = get('http://localhost:8000/comments?postId=9247449d-235b-4805-94e5-e2d41fb44c29')
+# db9 = delete('http://localhost:8000/comments?id=1e3e29ba-935a-425a-914b-7d32d8e5c3fc')
+# db10 = get('http://localhost:8000/comments?postId=9247449d-235b-4805-94e5-e2d41fb44c29')
 print('Muah')
 # pprint.pprint(businesses, indent=2)
