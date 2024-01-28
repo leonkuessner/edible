@@ -18,7 +18,7 @@ class Profile(Resource):
             }
         )
         db.disconnect()
-        return jsonify([res.__dict__ for res in response])
+        return jsonify([res.model_dump(round_trip=True) for res in response])
     
     # def post(self):
     #     data = request.json

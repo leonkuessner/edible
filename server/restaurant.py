@@ -24,7 +24,7 @@ class IndividualRestaurants(Resource):
         )
         db.disconnect()
         print(response)
-        return jsonify([res.__dict__ for res in response])
+        return jsonify([res.model_dump(round_trip=True) for res in response])
         
 
 class AllFollowingRestaurant(Resource):

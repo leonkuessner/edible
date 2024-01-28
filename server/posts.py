@@ -4,6 +4,7 @@ from prisma.models import Post
 from prisma.client import Client
 import json
 from datetime import datetime as dt
+import pydantic
 
 class Posts(Resource):
     def get(self):
@@ -24,12 +25,12 @@ class Posts(Resource):
                 'restaurant': True
             }
         )
-        res = [dict(item) for item in response]
+        # res = [dict(item) for item in response]
         # print(jsonify([res.__dict__ for res in response]))
         db.disconnect()
         if response is None:
             return {}
-        return json.dumps(res, indent=2)
+        return jsonify([res.model_dump(round_trip=True) for res in response])
         # return jsonify([res.__dict__ for res in response])
     
     def get_push_restaurant(self, params):
