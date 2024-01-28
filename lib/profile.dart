@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:testing_flutter/fetch_resources/fetch-profile.dart';
 import 'package:testing_flutter/main.dart';
 import 'package:testing_flutter/models/model.dart';
+import 'package:testing_flutter/widgets/map/map_fudge.dart';
 import 'package:testing_flutter/widgets/posts/post_list.dart';
 import 'package:testing_flutter/widgets/posts/post_grid_view.dart';
 import 'package:testing_flutter/widgets/posts/post_display.dart';
@@ -117,7 +118,7 @@ class _ProfilePageState extends State<ProfilePage> {
               child: TabBarView(
                 children: [
                   const PostGridView(), // Replace with your actual PostGridView
-                  MapView(), // Replace with your actual MapView
+                  MyMap(), // Replace with your actual MapView
                 ],
               ),
             ),

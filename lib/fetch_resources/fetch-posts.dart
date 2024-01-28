@@ -58,6 +58,7 @@ Future<List<Post>> fetch_individual_posts(String userId) async {
       var jsonList =
           (json.decode(res.body) as List).cast<Map<dynamic, dynamic>>();
       var jsonMapped = jsonList.map((model) => Post.fromJson(model)).toList();
+      print(jsonMapped);
       return jsonMapped;
     } catch (e) {
       rethrow;

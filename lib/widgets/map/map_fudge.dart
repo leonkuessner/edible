@@ -34,7 +34,7 @@ class _MyMapState extends State<MyMap> {
 
 
   void _updateBusinesses(businesses) {
-    _businesses = (Set.from(businesses)).union(Set.from(businesses));
+    _businesses = (Set.from(_businesses)).union(Set.from(businesses));
   }
 
   Future<void> fetchBusinesses() async {
@@ -44,7 +44,7 @@ class _MyMapState extends State<MyMap> {
     if (snapshot.statusCode == 200) {
       setState(() {
         var businesses = jsonDecode(snapshot.body);
-        print(businesses);
+  
         _updateBusinesses(businesses);
       });
     } else {
