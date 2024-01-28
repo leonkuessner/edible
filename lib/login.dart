@@ -112,18 +112,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       ]),
                 ),
               ),
-                Container(
-                margin: const EdgeInsets.only(left: 20, right: 20),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF55190E),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  child: Text("Map"),
-                  onPressed: () => {Navigator.push(context,MaterialPageRoute(builder: (context) => MyMap()))},
-                  ))
             ],
           ),
         ),
