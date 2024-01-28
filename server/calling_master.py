@@ -6,6 +6,7 @@ import profile
 import likes
 import restaurant
 import follows
+import comments
 from collections import defaultdict
 import os
 from prisma import Prisma, register
@@ -63,6 +64,7 @@ api.add_resource(restaurant.AllFollowingRestaurant, '/all-following-restaurant/<
 api.add_resource(restaurant.IndividualRestaurants, '/individual-restaurant/<string:user>')
 api.add_resource(follows.Follows, '/follows/<string:id>')
 api.add_resource(likes.Likes, '/likes/')
+api.add_resource(comments.Comments, '/comments/')
 
 if __name__ == '__main__':
     app.run(port=8000, debug=True)
