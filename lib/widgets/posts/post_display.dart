@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:http/http.dart';
@@ -19,7 +21,9 @@ class PostDisplay extends StatefulWidget {
 
 class _PostDisplayState extends State<PostDisplay> {
   bool showInfoCard = false;
+
   var _isLiked = false;
+  var _likeCount = 0;
 
   Future<bool> onLikeButtonTapped(bool isLiked) async {
     /// send your request here
@@ -51,11 +55,41 @@ class _PostDisplayState extends State<PostDisplay> {
   @override
   void initState() {
     super.initState();
-    _isLiked = widget.post.likes != null
-        ? widget.post.likes!
-            .map((like) => like.profileId)
-            .contains(widget.post.profileId)
-        : false;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _setIsLiked();
+      _setLikeCount();
+    });
+  }
+
+  Future<void> _setIsLiked() async {
+    try {
+      var res = await get(Uri.parse(
+          "http://localhost:8000/likes?postId=${widget.post.id}&userId=${widget.post.profileId}"));
+      if (res.statusCode == 200) {
+        if (jsonDecode(res.body)['like_count'] > 0) {
+          setState(() {
+            _isLiked = true;
+          });
+        }
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> _setLikeCount() async {
+    try {
+      var res = await get(
+          Uri.parse("http://localhost:8000/likes?postId=${widget.post.id}"));
+      if (res.statusCode == 200) {
+        setState(() {
+          print(jsonDecode(res.body)['like_count']);
+          _likeCount = jsonDecode(res.body)['like_count'];
+        });
+      }
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
@@ -301,9 +335,7 @@ class _PostDisplayState extends State<PostDisplay> {
                                 );
                               },
                               onTap: (isLiked) => onLikeButtonTapped(isLiked),
-                              likeCount: post.likes != null
-                                  ? post.likes!.toList().length
-                                  : 0,
+                              likeCount: _likeCount,
                               countBuilder:
                                   (int? count, bool isLiked, String text) {
                                 var color = const Color(0xFF55190E);
