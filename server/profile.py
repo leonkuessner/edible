@@ -14,7 +14,12 @@ class Profile(Resource):
             # This is just a potential ting to count likes and posts
             include={
                 'posts': True,
-                'postLikes': True
+                'postLikes': True,
+                'posts': {
+                    'include': {
+                        'restaurant': True
+                    }
+                }
             }
         )
         db.disconnect()
