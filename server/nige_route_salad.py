@@ -1,4 +1,5 @@
 from requests import put, get, post, delete
+import json
 
 '''
 GET REQUESTS:
@@ -36,4 +37,20 @@ DELETES
 d1 = delete("http://localhost:8000/posts?id=5b79591c-52d0-45c0-8a20-06e6cdcbd9b4")
 
 print([g1, g2, g3, g4, g5, y1, y2, d1])
+
+
+'''POST'''
+post('http://localhost:8000/posts/', data=json.dumps({'email': 'leonkuessner3@gmail.com', 
+                                                             'individual': True, 
+                                                             'restaurantId': 'se61yyYAHdKZ_Fq9ygXjVg', 
+                                                             'review': 'Big Munch', 
+                                                             'rating': 4, 
+                                                             'imageUrl': 'https://s3-media2.fl.yelpcdn.com/bphoto/YWWcF_UIra5KEaFkdgXB6g/o.jpg',
+                                                             'latitude': '51.509865',
+                                                             'longitude': '-0.118092',
+                                                             'userId': 'sdfsgasdfadgdf',
+                                                             'name': 'sdgfsdfs',
+                                                             'meal': MealType.BREAKFAST
+                                                             }), 
+            headers={'Content-Type': 'application/json'})
 
