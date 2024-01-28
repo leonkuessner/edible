@@ -2,37 +2,37 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "dart run orm"
-  output = "../lib/models"
+  provider             = "prisma-client-py"
+  output               = "../server/prisma"
   recursive_type_depth = -1
-  interface = "sync"
+  interface            = "sync"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
 
 model Profile {
-  id String @id @default(uuid())
-  email String @unique @db.Text
-  username String @unique @db.Text
+  id       String  @id @default(uuid())
+  email    String  @unique @db.Text
+  username String  @unique @db.Text
   imageUrl String? @db.Text
-  public Boolean @default(false)
+  public   Boolean @default(false)
 
   followsFollowing Follow[] @relation("following")
-  followsFollowed Follow[] @relation("followed")
+  followsFollowed  Follow[] @relation("followed")
 
-  posts Post[]
-  postTags PostTag[]
-  members Member[]
-  comments Comment[]
-  postLikes PostLike[]
+  posts        Post[]
+  postTags     PostTag[]
+  members      Member[]
+  comments     Comment[]
+  postLikes    PostLike[]
   commentLikes CommentLike[]
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 
   @@map("profile")
 }
@@ -40,14 +40,14 @@ model Profile {
 model Follow {
   id String @id @default(uuid())
 
-  following Profile @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
+  following   Profile @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
   followingId String
 
-  followed Profile @relation("followed", fields: [followedId], references: [id], onDelete: Cascade)
+  followed   Profile @relation("followed", fields: [followedId], references: [id], onDelete: Cascade)
   followedId String
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 
   @@map("follow")
 }
@@ -59,30 +59,30 @@ enum MealType {
 }
 
 model Post {
-  id String @id @default(uuid())
+  id         String   @id @default(uuid())
   individual Boolean
-  meal MealType
+  meal       MealType
 
-  restaurant Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
   restaurantId String
 
-  group Group? @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  group   Group?  @relation(fields: [groupId], references: [id], onDelete: Cascade)
   groupId String?
 
-  profile Profile? @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profile   Profile? @relation(fields: [profileId], references: [id], onDelete: Cascade)
   profileId String?
 
   comments Comment[]
-  likes PostLike[]
+  likes    PostLike[]
 
-  postTags PostTag[]
+  postTags   PostTag[]
   postImages PostImage[]
 
   review String @db.Text
   rating Int
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 
   @@map("post")
 }
@@ -90,14 +90,14 @@ model Post {
 model PostTag {
   id String @id @default(uuid())
 
-  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId String
 
-  profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
   profileId String
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 
   @@map("post_tag")
 }
@@ -105,27 +105,27 @@ model PostTag {
 model PostImage {
   id String @id @default(uuid())
 
-  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId String
 
   imageUrl String @db.Text
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 
   @@map("post_image")
 }
 
 model Group {
-  id String @id @default(uuid())
-  name String @db.Text
+  id          String @id @default(uuid())
+  name        String @db.Text
   description String @db.Text
 
   members Member[]
-  posts Post[]
+  posts   Post[]
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 
   @@map("group")
 }
@@ -133,36 +133,36 @@ model Group {
 model Member {
   id String @id @default(uuid())
 
-  profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
   profileId String
 
-  group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  group   Group  @relation(fields: [groupId], references: [id], onDelete: Cascade)
   groupId String
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 
   @@map("member")
 }
 
 model Comment {
-  id String @id @default(uuid())
+  id      String @id @default(uuid())
   message String @db.Text
 
-  replies Comment[] @relation("parent")
-  likes CommentLike[]
+  replies Comment[]     @relation("parent")
+  likes   CommentLike[]
 
-  parent Comment? @relation("parent", fields: [parentId], references: [id], onDelete: Cascade)
+  parent   Comment? @relation("parent", fields: [parentId], references: [id], onDelete: Cascade)
   parentId String?
 
-  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId String
 
-  profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
   profileId String
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 
   @@map("comment")
 }
@@ -170,14 +170,14 @@ model Comment {
 model PostLike {
   id String @id @default(uuid())
 
-  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId String
 
-  profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
   profileId String
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 
   @@map("post_like")
 }
@@ -185,14 +185,14 @@ model PostLike {
 model CommentLike {
   id String @id @default(uuid())
 
-  comment Comment @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  comment   Comment @relation(fields: [commentId], references: [id], onDelete: Cascade)
   commentId String
 
-  profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
   profileId String
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 
   @@map("comment_like")
 }
@@ -200,10 +200,10 @@ model CommentLike {
 model Restaurant {
   id String @id @default(uuid())
 
-  name String @db.Text
+  name   String @db.Text
   yelpId String @unique @db.Text
 
-  latitude String @db.Text
+  latitude  String @db.Text
   longitude String @db.Text
 
   posts Post[]
