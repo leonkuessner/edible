@@ -280,15 +280,27 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
             TabBar(
+              indicatorColor: const Color(0xFF55190E),
+              labelColor: const Color(0xFF55190E),
               tabs: [
-                Tab(icon: Icon(Icons.grid_on), text: 'Your Posts'),
-                Tab(icon: Icon(MdiIcons.mapCheckOutline), text: 'Map View'),
+                const Tab(
+                    icon: Icon(
+                      Icons.grid_on,
+                      color: Color(0xFF55190E),
+                    ),
+                    text: 'Your Posts'),
+                Tab(
+                    icon: Icon(
+                      MdiIcons.mapCheckOutline,
+                      color: const Color(0xFF55190E),
+                    ),
+                    text: 'Map View'),
               ],
             ),
             Expanded(
               child: TabBarView(
                 children: [
-                  PostGridView(), // Replace with your actual PostGridView
+                  const PostGridView(), // Replace with your actual PostGridView
                   MapView(), // Replace with your actual MapView
                 ],
               ),
@@ -304,7 +316,7 @@ class MapView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(
+      child: const Center(
         child: Text('Map View'),
       ),
     );
