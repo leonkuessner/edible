@@ -5102,7 +5102,7 @@ class PrismaClient {
   }) {
     datasources ??= {
       'db':
-          'postgres://postgres.jcehshqlyqsdoxerdbrn:cRM7u9UYBTGipV3c@aws-0-eu-west-2.pooler.supabase.com:6543/postgres?pgbouncer=true&connection_limit=1'
+          'postgres://postgres.jcehshqlyqsdoxerdbrn:EBAvuxP5vTjEe4QD@aws-0-eu-west-2.pooler.supabase.com:6543/postgres?pgbouncer=true&connection_limit=1'
     };
     if (datasourceUrl != null) {
       datasources = datasources.map((

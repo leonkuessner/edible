@@ -73,7 +73,11 @@ __all__ = (
 
 log: logging.Logger = logging.getLogger(__name__)
 
+<<<<<<< HEAD
 SCHEMA_PATH = Path('C:/Users/leonk/Clean Start/edible/prisma/schema.prisma')
+=======
+SCHEMA_PATH = Path('/Users/vinzkakilala/Desktop/dev/edible/prisma/schema.prisma')
+>>>>>>> a68c63a309610e6beb6b0d486b836fc1a134c1b7
 PACKAGED_SCHEMA_PATH = Path(__file__).parent.joinpath('schema.prisma')
 ENGINE_TYPE: EngineType = EngineType.binary
 BINARY_PATHS = model_parse(BinaryPaths, {'queryEngine': {'windows': 'C:\\Users\\leonk\\.cache\\prisma-python\\binaries\\5.8.0\\0a83d8541752d7582de2ebc1ece46519ce72a848\\node_modules\\prisma\\query-engine-windows.exe'}, 'introspectionEngine': {}, 'migrationEngine': {}, 'libqueryEngine': {}, 'prismaFmt': {}})

@@ -2,8 +2,13 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
+<<<<<<< HEAD
   provider             = "prisma-client-py"
   output               = "../server/prisma"
+=======
+  provider = "prisma-client-py"
+  output = "../server/prisma"
+>>>>>>> a68c63a309610e6beb6b0d486b836fc1a134c1b7
   recursive_type_depth = -1
   interface            = "sync"
 }
