@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:testing_flutter/fetch_resources/fetch-profile.dart';
+import 'package:testing_flutter/main.dart';
+import 'package:testing_flutter/models/model.dart';
 import 'package:testing_flutter/widgets/posts/post_list.dart';
 import 'package:testing_flutter/widgets/posts/post_grid_view.dart';
 import 'package:testing_flutter/widgets/posts/post_display.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:testing_flutter/widgets/profile/profile_dashboard.dart';
+
 
 class TaggedPostsPage extends StatelessWidget {
   const TaggedPostsPage({Key? key}) : super(key: key);
@@ -15,8 +19,42 @@ class TaggedPostsPage extends StatelessWidget {
   }
 }
 
-class ProfilePage extends StatelessWidget {
+
+
+
+
+class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  var _loading = true;
+  late (Profile,(int,int)) _profData;
+
+  @override
+  void initState() {
+    _fetchProfile();
+    super.initState();
+  }
+
+  void _setProfData(newProfData) {
+    setState(() => _profData = newProfData);
+  }
+
+  Future<void> _fetchProfile() async{
+    var userId  = supabase.auth.currentSession?.user.id;
+    var res = await fetchProfile(userId ?? "");
+    try{_setProfData(res as (Profile,(int,int)));
+        print(res);
+        setState(() => _loading = false);
+    }
+    catch(e){
+      rethrow;
+    
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +66,10 @@ class ProfilePage extends StatelessWidget {
           children: [
             // Your static widgets here...
             // For example, a follow button:
-            ProfileDashboard(),
+            //ProfileDashboard(),
+            _loading ?
+            Center(child: CircularProgressIndicator())
+            :
             TabBar(
               indicatorColor: const Color(0xFF55190E),
               labelColor: const Color(0xFF55190E),
@@ -51,7 +92,7 @@ class ProfilePage extends StatelessWidget {
               child: TabBarView(
                 children: [
                   const PostGridView(), // Replace with your actual PostGridView
-                  MapView(), // Replace with your actual MapView
+                  MapView(),            // Replace with your actual MapView
                 ],
               ),
             ),
@@ -61,7 +102,7 @@ class ProfilePage extends StatelessWidget {
     );
   }
 }
-
+}
 class MapView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

@@ -32,14 +32,36 @@ displayBizInfo(BuildContext context, String yelpId){
 }
 
 
+class PinpointContainer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 40,
+      height: 25,
+      decoration: BoxDecoration(
+        color: Colors.orange[200],
+        border:Border.all(color: Color(0xFF55190E), width: 2),
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Image.asset('assets/images/restoicon.png',
+          width: 25,height: 25,)
+        ],
+      ),
+    );
+  }
+}
+
+
 Marker minimalBusinessMarker(BuildContext context, pos, String yelpId){
   return 
   Marker(point: pos,
-         child:GestureDetector(
-               child:Icon(Icons.restaurant,
-                          size:20,
-                          color: Colors.orange,),
-               onTap:() => displayBizInfo(context, yelpId)));
+         width:  40,
+         height: 25,
+         child:  GestureDetector(child: PinpointContainer(),
+            onTap:() => displayBizInfo(context, yelpId)));
 }
 
 
