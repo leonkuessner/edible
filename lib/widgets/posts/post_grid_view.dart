@@ -31,13 +31,11 @@ class _PostGridViewState extends State<PostGridView> {
   Future<void> _fetchPosts() async {
     var res = await fetch_individual_posts(widget.userId);
     try {
+      print(res);
       setState(() {
         _setPosts(res);
       });
       print("all good");
-      _fetchedPosts.forEach((p) {
-        print(p.review);
-      });
       setState(() {
         _loaded = true;
       });
