@@ -9,15 +9,15 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:testing_flutter/widgets/map/restaurant_marker.dart';
-Future fetch_businesses(LatLng center, double radius)  {
-  var snapshot =   get(Uri.parse('http://localhost:5000/businesses?latitude=${center.latitude}&longitude=${center.longitude}&radius=${min((radius*1000).toInt(),40000)}'))
-  .then((r) => jsonDecode(r.body))
-  .then((r) => r['businesses'])
-  .catchError((r) => []);
+
+Future fetch_businesses(LatLng center, double radius) {
+  var snapshot = get(Uri.parse(
+          'http://localhost:8000/businesses?latitude=${center.latitude}&longitude=${center.longitude}&radius=${min((radius * 1000).toInt(), 40000)}'))
+      .then((r) => jsonDecode(r.body))
+      .then((r) => r['businesses'])
+      .catchError((r) => []);
   return snapshot;
-  }
-
-
+}
 
 class MapErrorAlert extends StatelessWidget {
   const MapErrorAlert({super.key});
