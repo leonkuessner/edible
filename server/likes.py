@@ -5,7 +5,17 @@ from prisma.client import Client
 
 class Likes(Resource):
     def get(self):
-        return
+        id = request.args.to_dict().get('postId')
+        print(id)
+        db = Client()
+        db.connect()
+        response = db.postlike.count(
+            where={
+                'postId': id
+            }
+        )
+        db.disconnect()
+        return {'like_count': response}
     
     def post(self):
         params = request.args.to_dict()
