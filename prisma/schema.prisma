@@ -2,8 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "dart run orm"
-  output = "../lib/models"
+  provider = "prisma-client-py"
+  output = "../server/prisma"
   recursive_type_depth = -1
   interface = "sync"
 }
