@@ -64,6 +64,7 @@ class Profile(bases.BaseProfile):
     username: _str
     imageUrl: Optional[_str] = None
     public: _bool
+    bio: Optional[_str] = None
     followsFollowing: Optional[List['models.Follow']] = None
     followsFollowed: Optional[List['models.Follow']] = None
     posts: Optional[List['models.Post']] = None
@@ -1447,6 +1448,14 @@ _Profile_fields: Dict['types.ProfileKeys', PartialModelField] = OrderedDict(
             'is_list': False,
             'optional': False,
             'type': '_bool',
+            'is_relational': False,
+            'documentation': None,
+        }),
+        ('bio', {
+            'name': 'bio',
+            'is_list': False,
+            'optional': True,
+            'type': '_str',
             'is_relational': False,
             'documentation': None,
         }),

@@ -20,6 +20,7 @@ model Profile {
   username String  @unique @db.Text
   imageUrl String? @db.Text
   public   Boolean @default(true)
+  bio      String? @db.Text @default("just a hungry little foodie!")
 
   followsFollowing Follow[] @relation("following")
   followsFollowed  Follow[] @relation("followed")

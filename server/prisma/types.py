@@ -778,6 +778,7 @@ class ProfileOptionalCreateInput(TypedDict, total=False):
     id: _str
     imageUrl: Optional[_str]
     public: _bool
+    bio: Optional[_str]
     followsFollowing: 'FollowCreateManyNestedWithoutRelationsInput'
     followsFollowed: 'FollowCreateManyNestedWithoutRelationsInput'
     posts: 'PostCreateManyNestedWithoutRelationsInput'
@@ -804,6 +805,7 @@ class ProfileOptionalCreateWithoutRelationsInput(TypedDict, total=False):
     id: _str
     imageUrl: Optional[_str]
     public: _bool
+    bio: Optional[_str]
     createdAt: datetime.datetime
     updatedAt: datetime.datetime
 
@@ -862,6 +864,7 @@ class ProfileUpdateInput(TypedDict, total=False):
     username: _str
     imageUrl: Optional[_str]
     public: _bool
+    bio: Optional[_str]
     followsFollowing: 'FollowUpdateManyWithoutRelationsInput'
     followsFollowed: 'FollowUpdateManyWithoutRelationsInput'
     posts: 'PostUpdateManyWithoutRelationsInput'
@@ -881,6 +884,7 @@ class ProfileUpdateManyMutationInput(TypedDict, total=False):
     username: _str
     imageUrl: Optional[_str]
     public: _bool
+    bio: Optional[_str]
     createdAt: datetime.datetime
     updatedAt: datetime.datetime
 
@@ -957,6 +961,14 @@ _Profile_public_OrderByInput = TypedDict(
     total=True
 )
 
+_Profile_bio_OrderByInput = TypedDict(
+    '_Profile_bio_OrderByInput',
+    {
+        'bio': 'SortOrder',
+    },
+    total=True
+)
+
 _Profile_createdAt_OrderByInput = TypedDict(
     '_Profile_createdAt_OrderByInput',
     {
@@ -979,6 +991,7 @@ ProfileOrderByInput = Union[
     '_Profile_username_OrderByInput',
     '_Profile_imageUrl_OrderByInput',
     '_Profile_public_OrderByInput',
+    '_Profile_bio_OrderByInput',
     '_Profile_createdAt_OrderByInput',
     '_Profile_updatedAt_OrderByInput',
 ]
@@ -1285,6 +1298,7 @@ class ProfileWhereInput(TypedDict, total=False):
     username: Union[_str, 'types.StringFilter']
     imageUrl: Union[None, _str, 'types.StringFilter']
     public: Union[_bool, 'types.BooleanFilter']
+    bio: Union[None, _str, 'types.StringFilter']
     followsFollowing: 'FollowListRelationFilter'
     followsFollowed: 'FollowListRelationFilter'
     posts: 'PostListRelationFilter'
@@ -1314,6 +1328,7 @@ class ProfileScalarWhereWithAggregatesInput(TypedDict, total=False):
     username: Union[_str, 'types.StringWithAggregatesFilter']
     imageUrl: Union[_str, 'types.StringWithAggregatesFilter']
     public: Union[_bool, 'types.BooleanWithAggregatesFilter']
+    bio: Union[_str, 'types.StringWithAggregatesFilter']
     createdAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
     updatedAt: Union[datetime.datetime, 'types.DateTimeWithAggregatesFilter']
 
@@ -1329,6 +1344,7 @@ class ProfileGroupByOutput(TypedDict, total=False):
     username: _str
     imageUrl: _str
     public: _bool
+    bio: _str
     createdAt: datetime.datetime
     updatedAt: datetime.datetime
     _sum: 'ProfileSumAggregateOutput'
@@ -1353,6 +1369,7 @@ class ProfileScalarAggregateOutput(TypedDict, total=False):
     username: _str
     imageUrl: _str
     public: _bool
+    bio: _str
     createdAt: datetime.datetime
     updatedAt: datetime.datetime
 
@@ -1368,6 +1385,7 @@ class ProfileMaxAggregateInput(TypedDict, total=False):
     username: bool
     imageUrl: bool
     public: bool
+    bio: bool
     createdAt: bool
     updatedAt: bool
 
@@ -1379,6 +1397,7 @@ class ProfileMinAggregateInput(TypedDict, total=False):
     username: bool
     imageUrl: bool
     public: bool
+    bio: bool
     createdAt: bool
     updatedAt: bool
 
@@ -1399,6 +1418,7 @@ ProfileCountAggregateInput = TypedDict(
         'username': bool,
         'imageUrl': bool,
         'public': bool,
+        'bio': bool,
         'createdAt': bool,
         'updatedAt': bool,
         '_all': bool,
@@ -1414,6 +1434,7 @@ ProfileCountAggregateOutput = TypedDict(
         'username': int,
         'imageUrl': int,
         'public': int,
+        'bio': int,
         'createdAt': int,
         'updatedAt': int,
         '_all': int,
@@ -1428,6 +1449,7 @@ ProfileKeys = Literal[
     'username',
     'imageUrl',
     'public',
+    'bio',
     'followsFollowing',
     'followsFollowed',
     'posts',
@@ -1445,6 +1467,7 @@ ProfileScalarFieldKeys = Literal[
     'username',
     'imageUrl',
     'public',
+    'bio',
     'createdAt',
     'updatedAt',
 ]
