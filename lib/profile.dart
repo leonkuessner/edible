@@ -288,13 +288,13 @@ class ProfilePage extends StatelessWidget {
                       Icons.grid_on,
                       color: Color(0xFF55190E),
                     ),
-                    text: 'Your Posts'),
+                    text: 'your posts'),
                 Tab(
                     icon: Icon(
                       MdiIcons.mapCheckOutline,
                       color: const Color(0xFF55190E),
                     ),
-                    text: 'Map View'),
+                    text: 'map view'),
               ],
             ),
             Expanded(
