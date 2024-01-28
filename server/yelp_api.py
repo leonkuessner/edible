@@ -41,6 +41,19 @@ def search_url(params):
     url_params.setdefault('limit', SEARCH_LIMIT)
     return request(API_HOST, SEARCH_PATH, API_KEY, url_params=url_params)
 
+
+
+def search(params):
+    res = search_url(params)['businesses']
+    '''
+    Filtering to be done, lets clear it up later
+    '''
+    keys = ['coordinates', 'id']
+
+
+    # return [{key: value for key, value in d.items() if key in keys} for d in res]
+    return [{key: pydash.get(d, key) for key in keys} for d in res]
+
 def get_business(business_id):
     '''
     Args:
@@ -59,20 +72,8 @@ def get_business(business_id):
     return {key: pydash.get(res, key) for key in keys}
     # return res
 
-
-def search(params):
-    res = search_url(params)['businesses']
-    '''
-    Filtering to be done, lets clear it up later
-    '''
-    keys = ['coordinates', 'id']
-
-
-    # return [{key: value for key, value in d.items() if key in keys} for d in res]
-    return [{key: pydash.get(d, key) for key in keys} for d in res]
-
-
 def main():
     pass
+
 if __name__ == '__main__':
     main()

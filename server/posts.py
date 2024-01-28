@@ -2,7 +2,9 @@ from flask_restful import Resource, Api
 from flask import request, jsonify
 from prisma.models import Post
 from prisma.client import Client
+import json
 from datetime import datetime as dt
+import pydantic
 
 class Posts(Resource):
     def get(self):
@@ -19,9 +21,11 @@ class Posts(Resource):
                 }
             ]
         )
-        print(response)
         db.disconnect()
-        return jsonify([res.__dict__ for res in response])
+        if response is None:
+            return {}
+        return jsonify([res.model_dump(round_trip=True) for res in response])
+        # return jsonify([res.__dict__ for res in response])
     
     def get_push_restaurant(self, params):
         db = Client()
@@ -59,7 +63,6 @@ class Posts(Resource):
                 }
             }
         )
-        print(new_post)
         if data.get('postTag') is not None:
             new_post_tag = db.posttag.create(
                 data = {
@@ -71,45 +74,43 @@ class Posts(Resource):
                     }
                 }
             )
-            print(new_post_tag)
-        # if data.get('imageUrl') is not None:
-        new_post_image = db.postimage.create(
-            data = {
-                'post': {
-                    'connect': { 'id': new_post.id }
-                },
-                'imageUrl': data['imageUrl']
-            }
-        )
-        print(new_post_image)
-        # if data.get('userId') is not None:
-        db.profile.update(
-            where = { 'id': data['userId'] },
-            data = {
-                'posts': {
-                    'connect': { 'id': new_post.id }
+        if data.get('imageUrl') is not None:
+            new_post_image = db.postimage.create(
+                data = {
+                    'post': {
+                        'connect': { 'id': new_post.id }
+                    },
+                    'imageUrl': data['imageUrl']
                 }
-            }
-        )
-        # else:
-        #     try:
-        #         db.group.update(
-        #             where = { 'id': data['userId'] },
-        #             data = {
-        #                 'posts': {
-        #                     'connect': { 'id': new_post.id }
-        #                 }
-        #             } 
-        #         )
-        #     except Exception as e:
-        #         print('Updating group failed: ', e)
-        #         db.disconnect()
-        #         return 
+            )
+        
+        if data.get('userId') is not None:
+            db.profile.update(
+                where = { 'id': data['userId'] },
+                data = {
+                    'posts': {
+                        'connect': { 'id': new_post.id }
+                    }
+                }
+            )
+        else:
+            try:
+                db.group.update(
+                    where = { 'id': data['userId'] },
+                    data = {
+                        'posts': {
+                            'connect': { 'id': new_post.id }
+                        }
+                    } 
+                )
+            except Exception as e:
+                print('Updating group failed: ', e)
+                db.disconnect()
+                return 
 
         response = db.post.find_many()
-        print(response)
         db.disconnect()
-        return {'1':1}
+        return jsonify([res.__dict__ for res in response])
     
     def delete(self):
         params = request.args.to_dict()
@@ -122,26 +123,4 @@ class Posts(Resource):
         )
         db.disconnect()
         return deleteUser
-    
-    # def getProfile(self, username):
-    #     db = Client()
-    #     db.connect()
-    #     response = db.profile.find_unique(
-    #         where={'email': username},
-    #         select={
-    #             'id': True
-    #         }
-    #     )
-    #     print(response)
-    #     db.disconnect()
-    #     return response
         
-            
-        # return
-        
-# class Follow(Resource):
-#     def get(self):
-#         fo
-
-    
-    

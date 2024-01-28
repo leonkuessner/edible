@@ -1,9 +1,10 @@
-from prisma import Prisma
+
+from prisma.client import Client
 
 def main():
-  db = Prisma()
+  db = Client()
   db.connect()
-  posts = db.post.find_many(where={})
+  posts = db.post.find_many()
   print(posts)
   db.disconnect()
 
