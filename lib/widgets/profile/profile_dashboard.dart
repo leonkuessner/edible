@@ -129,21 +129,33 @@ class _ProfileDashboard extends State<ProfileDashboard> {
             ),
           ),
           Padding(
-            padding:
-                const EdgeInsets.only(top: 4, left: 8, right: 8, bottom: 16),
+            padding: const EdgeInsets.only(
+                top: 4, left: 130, right: 130, bottom: 16),
             child: ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor:
-                    Colors.orange[200], // Set background color to orange[200]
-              ),
-              child: const Text(
-                'follow',
-                style: TextStyle(
-                  color: Color(0xFF55190E), // Set text color to brown
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor:
+                      Colors.orange[200], // Set background color to orange[200]
                 ),
-              ),
-            ),
+                child: Row(
+                    // Replace with a Row for horizontal icon + text
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.edit,
+                        color: Color(0xFF55190E), // Set text color to brown
+                      ),
+                      const SizedBox(
+                          width: 8), // Add space between icon and text
+                      Text(
+                        'edit profile',
+                        style: TextStyle(
+                          color: Color(0xFF55190E), // Set text color to brown
+                        ),
+                      ),
+                      const SizedBox(
+                          width: 8), // Add space between icon and text
+                    ])),
           ),
         ],
       ),
