@@ -280,9 +280,21 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
             TabBar(
+              indicatorColor: Color(0xFF55190E),
+              labelColor: Color(0xFF55190E),
               tabs: [
-                Tab(icon: Icon(Icons.grid_on), text: 'Your Posts'),
-                Tab(icon: Icon(MdiIcons.mapCheckOutline), text: 'Map View'),
+                Tab(
+                    icon: Icon(
+                      Icons.grid_on,
+                      color: Color(0xFF55190E),
+                    ),
+                    text: 'Your Posts'),
+                Tab(
+                    icon: Icon(
+                      MdiIcons.mapCheckOutline,
+                      color: Color(0xFF55190E),
+                    ),
+                    text: 'Map View'),
               ],
             ),
             Expanded(
