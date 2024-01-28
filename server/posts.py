@@ -25,7 +25,7 @@ class Posts(Resource):
     def get_push_restaurant(self, params):
         db = Client()
         db.connect()
-        
+
         res = db.restaurant.find_unique(
             where = {'yelpId': params['restaurantId']}
         )
@@ -48,6 +48,7 @@ class Posts(Resource):
         db = Client()
         db.connect()
         new_restaurant = self.get_push_restaurant(data)
+        print(new_restaurant)
         new_post = db.post.create(
             data={
                 key: data.get(key) for key in response_keys if key in data
