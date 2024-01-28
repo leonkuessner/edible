@@ -3,7 +3,7 @@ from flask_restful import Resource, Api
 from yelp_api import get_business, search
 import posts
 import profile
-#import likes
+import likes
 import restaurant
 import follows
 from collections import defaultdict
@@ -62,7 +62,7 @@ api.add_resource(profile.Profile, '/profile/')
 api.add_resource(restaurant.AllFollowingRestaurant, '/all-following-restaurant/<string:user>')
 api.add_resource(restaurant.IndividualRestaurants, '/individual-restaurant/<string:user>')
 api.add_resource(follows.Follows, '/follows/<string:id>')
-#api.add_resource(likes.Likes, '/likes/')
+api.add_resource(likes.Likes, '/likes/')
 
 if __name__ == '__main__':
     app.run(port=8000, debug=True)
