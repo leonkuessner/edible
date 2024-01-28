@@ -10,7 +10,7 @@ import 'package:testing_flutter/models/model.dart';
 
 
 
-Future<(Profile,(Int,Int))> fetchProfile(String userID) async {
+Future<(Profile,(int,int))> fetchProfile(String userID) async {
   var profileRes = await get(Uri.parse('http://localhost:8000/profile/?id=${userID}'));
   print(profileRes);
   if (profileRes.statusCode == 200) {
@@ -23,12 +23,16 @@ Future<(Profile,(Int,Int))> fetchProfile(String userID) async {
       if (followsRes.statusCode == 200) {
         try {
           var jsonList = (json.decode(followsRes.body)).cast<Map<String, int>>();
-          var followData = (jsonList['following'],jsonList['followed']) as (Int,Int);
+          var followData = (jsonList['following'],jsonList['followed']) as (int,int);
           return (profile,followData);  
         } 
         catch (e) {
             rethrow;
           }}
+      else if (followsRes.statusCode == 404){
+         return (profile,(0,0));
+      }
+          
     } catch (e) {
       rethrow;
  

@@ -3,7 +3,7 @@ import 'package:testing_flutter/models/model.dart';
 import 'package:testing_flutter/models/prisma.dart';
 
 class ProfileDashboard extends StatefulWidget {
-  late ProfData profData;
+  var  profData;
   ProfileDashboard(ProfData profData, {required UniqueKey key}){
   }
 
