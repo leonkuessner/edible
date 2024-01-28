@@ -68,13 +68,13 @@ class _ProfilePageState extends State<ProfilePage> {
           children: [
             // Your static widgets here...
             // For example, a follow button:
-  
+
             _loading
-                ? Center(child: CircularProgressIndicator())
-                :           ProfileDashboard(
-              _profData,
-              key: UniqueKey(),
-            ),
+                ? SizedBox.shrink()
+                : ProfileDashboard(
+                    _profData,
+                    key: UniqueKey(),
+                  ),
             //     TabBar(
             //         indicatorColor: const Color(0xFF55190E),
             //         labelColor: const Color(0xFF55190E),
@@ -95,7 +95,7 @@ class _ProfilePageState extends State<ProfilePage> {
             //       ),
             // //ProfileDashboard(),
             _loading
-                ? Center(child: CircularProgressIndicator())
+                ? SizedBox.shrink()
                 : TabBar(
                     indicatorColor: const Color(0xFF55190E),
                     labelColor: const Color(0xFF55190E),
