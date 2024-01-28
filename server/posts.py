@@ -15,7 +15,12 @@ class Posts(Resource):
                 {
                     'createdAt': 'desc'
                 }
-            ]
+            ],
+            include= {
+                'postImages': True,
+                'comments': True,
+                'profile': True
+            }
         )
         db.disconnect()
         if response is None:

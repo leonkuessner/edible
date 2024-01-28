@@ -1,8 +1,6 @@
 from flask_restful import Resource, Api
 from flask import request, jsonify
-from prisma.models import Post
 from prisma.client import Client
-from datetime import datetime as dt
 
 
 class Profile(Resource):
