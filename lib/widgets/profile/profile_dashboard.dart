@@ -3,11 +3,11 @@ import 'package:testing_flutter/models/model.dart';
 import 'package:testing_flutter/models/prisma.dart';
 
 class ProfileDashboard extends StatefulWidget {
-  var  profile;
-  var  following;
+  var profile;
+  var following;
   var followers;
-  ProfileDashboard(ProfData profData, {required UniqueKey key}){
-    var (x1,(x2,x3)) = profData;
+  ProfileDashboard(ProfData profData, {required UniqueKey key}) {
+    var (x1, (x2, x3)) = profData;
     profile = x1;
     followers = x2;
     following = x3;
@@ -20,7 +20,8 @@ class ProfileDashboard extends StatefulWidget {
 class _ProfileDashboard extends State<ProfileDashboard> {
   @override
   Widget build(BuildContext context) {
-    var (profile,followers,following) = (widget.profile as Profile,widget.followers,widget.following);
+    var (profile, followers, following) =
+        (widget.profile as Profile, widget.followers, widget.following);
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -44,73 +45,84 @@ class _ProfileDashboard extends State<ProfileDashboard> {
               ),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Column(
-                children: [
-                  Text(
-                    profile.posts!.length.toString(),
-                    style: TextStyle(
-                      color: Color(0xFF55190E),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
+          Padding(
+            padding: EdgeInsets.only(left: 40, right: 40),
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Text(
+                          profile.posts!.length.toString(),
+                          style: TextStyle(
+                            color: Color(0xFF55190E),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                        ),
+                        Text(
+                          'posts',
+                          style: TextStyle(
+                            color: Color(0xFF55190E),
+                            fontSize: 10,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  Text(
-                    'posts',
-                    style: TextStyle(
-                      color: Color(0xFF55190E),
-                      fontSize: 10,
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Text(
+                          followers.toString(),
+                          style: TextStyle(
+                            color: Color(0xFF55190E),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                        ),
+                        Text(
+                          'followers',
+                          style: TextStyle(
+                            color: Color(0xFF55190E),
+                            fontWeight: FontWeight.normal,
+                            fontSize: 10,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Text(
+                          following.toString(),
+                          style: TextStyle(
+                            color: Color(0xFF55190E),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                        ),
+                        Text(
+                          'following',
+                          style: TextStyle(
+                            color: Color(0xFF55190E),
+                            fontSize: 10,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
               ),
-              Column(
-                children: [
-                  Text(
-                    followers.toString(),
-                    style: TextStyle(
-                      color: Color(0xFF55190E),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  ),
-                  Text(
-                    'followers',
-                    style: TextStyle(
-                      color: Color(0xFF55190E),
-                      fontWeight: FontWeight.normal,
-                      fontSize: 10,
-                    ),
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  Text(
-                    following.toString(),
-                    style: TextStyle(
-                      color: Color(0xFF55190E),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  ),
-                  Text(
-                    'following',
-                    style: TextStyle(
-                      color: Color(0xFF55190E),
-                      fontSize: 10,
-                    ),
-                  ),
-                ],
-              ),
-            ],
+            ),
           ),
-          const Padding(
+          Padding(
             padding: EdgeInsets.only(left: 8, right: 8, top: 12, bottom: 8),
             child: Text(
-              'just a hungry little foodie!',
+              profile.bio!,
               style: TextStyle(
                 color: Color(0xFF55190E), // Use the same color for all text
               ),
