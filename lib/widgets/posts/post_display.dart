@@ -60,8 +60,7 @@ class _PostDisplayState extends State<PostDisplay> {
                             color: const Color(0xFF55190E),
                           ),
                           const SizedBox(width: 6),
-                          Text(
-                              post.profile!.username!,
+                          Text(post.profile!.username!,
                               style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -200,6 +199,8 @@ class _PostDisplayState extends State<PostDisplay> {
                                 child: Image.network(
                               postImage.imageUrl!,
                               fit: BoxFit.cover,
+                              width: 500,
+                              height: 500,
                               loadingBuilder: (BuildContext context,
                                   Widget child,
                                   ImageChunkEvent? loadingProgress) {
@@ -263,7 +264,9 @@ class _PostDisplayState extends State<PostDisplay> {
                           children: [
                             const SizedBox(width: 2),
                             Text(
-                              "${post.likes} likes",
+                              post.likes != null
+                                  ? "${post.likes!.toList().length} ${post.likes!.toList().length == 1 ? "like" : "likes"}}"
+                                  : "0 likes",
                               style: const TextStyle(
                                 fontSize: 14,
                                 color: Color(0xFF55190E),
@@ -279,29 +282,32 @@ class _PostDisplayState extends State<PostDisplay> {
                   thickness: 0.2,
                 ),
                 const SizedBox(height: 8),
-                Padding(
-                  padding: const EdgeInsets.only(left: 12, right: 12),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        post.review!,
-                        style: const TextStyle(
-                          fontSize: 14,
-                          color: Color(0xFF55190E),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 12, right: 12),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          post.review!,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Color(0xFF55190E),
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
+                )
               ],
             ),
           ),
         ),
         if (showInfoCard)
           RestaurantInfoCard(
-            restaurant: Restaurant(),
+            restaurant: const Restaurant(),
           ),
       ],
     );
