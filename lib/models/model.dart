@@ -1,13 +1,12 @@
 library prisma.namespace.model; // ignore_for_file: no_leading_underscores_for_library_prefixes
 
-import 'package:orm/orm.dart' as _i2;
 import 'package:intl/intl.dart';
+import 'package:orm/orm.dart' as _i2;
 
 import 'model.dart' as _i1;
 import 'prisma.dart' as _i3;
 
-typedef ProfData = (Profile,(int,int));
-
+typedef ProfData = (Profile, (int, int));
 
 class Follow {
   const Follow({
@@ -513,6 +512,7 @@ class Profile {
     this.username,
     this.imageUrl,
     this.public,
+    this.bio,
     this.createdAt,
     this.updatedAt,
     this.followsFollowing,
@@ -532,6 +532,7 @@ class Profile {
         username: json['username'],
         imageUrl: json['imageUrl'],
         public: json['public'],
+        bio: json['bio'],
         createdAt: DateFormat("E, dd MMM yyyy HH:mm:ss 'GMT'")
             .parse(json['createdAt']),
         updatedAt: DateFormat("E, dd MMM yyyy HH:mm:ss 'GMT'")
@@ -566,6 +567,8 @@ class Profile {
   final String? imageUrl;
 
   final bool? public;
+
+  final String? bio;
 
   final DateTime? createdAt;
 

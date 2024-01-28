@@ -14,17 +14,17 @@ Calls take way too long - need a way to improve
 # businesses = [get(f"http://localhost:8000/details/{b['id']}") for b in content]
 
 # profile = post('http://localhost:8000/profile/', data=json.dumps({'email': 'leonkuessner3@gmail.com', 'username': 'MunchMunch', 'public': True}), headers={'Content-Type': 'application/json'})
-# db1 = post('http://localhost:8000/posts/', data=json.dumps({'email': 'ayaanmather561@gmail.com', 
-#                                                             'userId': '04b6bfb9-437f-4e64-9633-9c0d226a3e49',
+# db1 = post('http://localhost:8000/posts/', data=json.dumps({'email': 'aalaapdey@gmail.com', 
+#                                                             'userId': '58784df6-56a7-4d01-b732-ed5772dbf1ae',
 #                                                             'individual': True, 
-#                                                             'restaurantId': 'se61yyYAHdKZ_Fq9ygXjVg', 
-#                                                             'review': 'Epic meal!!! >:3', 
-#                                                             'rating': 5, 
-#                                                             'name': 'MunchMunch',
-#                                                             'meal': MealType.DINNER,
-#                                                             'imageUrl': 'https://feedgrump.com/wp-content/uploads/2023/05/hawaii-chicken-katsu-curry-plating-feature.jpg',
-#                                                             'latitude': '51.509865',
-#                                                             'longitude': '-0.118092',
+#                                                             'restaurantId': 'ke61dyYAHdKZ_Fq9ygXjVg', 
+#                                                             'review': 'I enjoyed the food, but the service was a bit slow. I would recommend this place to anyone who likes Indian food, but maybe stick to nights that are less busy.', 
+#                                                             'rating': 4, 
+#                                                             'name': 'Dey Eats',
+#                                                             'meal': MealType.LUNCH,
+#                                                             'imageUrl': 'https://www.kitchensanctuary.com/wp-content/uploads/2019/09/Chicken-Tikka-Masala-tall-FS-58.webp',
+#                                                             'latitude': '23.509865',
+#                                                             'longitude': '12.118092',
 #                                                             }), 
 #            headers={'Content-Type': 'application/json'})
 
