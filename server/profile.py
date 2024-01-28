@@ -17,7 +17,6 @@ class Profile(Resource):
                 'postLikes': True
             }
         )
-        print(response)
         db.disconnect()
         return jsonify([res.__dict__ for res in response])
     

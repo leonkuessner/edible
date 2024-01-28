@@ -57,7 +57,8 @@ api.add_resource(AllBusinesses, '/businesses/')
 
 api.add_resource(posts.Posts, '/posts/')
 api.add_resource(profile.Profile, '/profile/')
-api.add_resource(restaurant.Restaurant, '/restaurant/')
+api.add_resource(restaurant.AllFollowingRestaurant, '/all-following-restaurant/<string:user>')
+api.add_resource(restaurant.IndividualRestaurants, '/individual-restaurant/<string:user>')
 api.add_resource(follows.Follows, '/follows/<string:id>')
 # api.add_resource(likes.Likes, '/likes/')
 

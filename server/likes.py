@@ -12,17 +12,18 @@ class Likes(Resource):
         
         db = Client()
         db.connect()
-        post = db.postlike.create(
-            data = {
-                'post': {
-                    'connect': { 'id': params.get('postId') }
-                },
-                'profile': {
-                    'connect': { 'id': params.get('profileId') }
-                }
-            }
-        )
+        # post = db.postlike.create(
+        #     data = {
+        #         'post': {
+        #             'connect': { 'id': params.get('postId') }
+        #         },
+        #         'profile': {
+        #             'connect': { 'id': params.get('profileId') }
+        #         }
+        #     }
+        # )
         db.disconnect()
-        return post
+        # return post
+        return
         
         

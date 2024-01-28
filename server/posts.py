@@ -2,6 +2,7 @@ from flask_restful import Resource, Api
 from flask import request, jsonify
 from prisma.models import Post
 from prisma.client import Client
+import json
 from datetime import datetime as dt
 
 class Posts(Resource):
@@ -16,16 +17,20 @@ class Posts(Resource):
                     'createdAt': 'desc'
                 }
             ],
-            include= {
+            include = {
                 'postImages': True,
                 'comments': True,
-                'profile': True
+                'profile': True,
+                'restaurant': True
             }
         )
+        res = [dict(item) for item in response]
+        # print(jsonify([res.__dict__ for res in response]))
         db.disconnect()
         if response is None:
             return {}
-        return jsonify([res.__dict__ for res in response])
+        return json.dumps(res, indent=2)
+        # return jsonify([res.__dict__ for res in response])
     
     def get_push_restaurant(self, params):
         db = Client()

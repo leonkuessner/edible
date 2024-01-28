@@ -29,7 +29,7 @@ Calls take way too long - need a way to improve
 #            headers={'Content-Type': 'application/json'})
 
 db2 = get('http://localhost:8000/posts/')
-db3 = get('http://localhost:8000/profile/')
+# db3 = get('http://localhost:8000/profile/')
 # db4 = get('http://localhost:8000/follows/5b79591c-52d0-45c0-8a20-06e6cdcbd9b4')
 print('rawr')
 # pprint.pprint(businesses, indent=2)
