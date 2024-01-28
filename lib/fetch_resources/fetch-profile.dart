@@ -17,7 +17,6 @@ Future<(Profile, (int, int))> fetchProfile(String userID) async {
       var profile = Profile.fromJson(jsonList[0]);
       print(profile);
       print(profile?.username);
-<<<<<<< HEAD
       var followsRes = await get(Uri.parse('http://localhost:8000/follows/${userID}'));
       if (followsRes.statusCode == 200) {
         try {
@@ -30,22 +29,6 @@ Future<(Profile, (int, int))> fetchProfile(String userID) async {
           }}
       else if (followsRes.statusCode == 404){
          return (profile,(0,0));
-=======
-      var followsRes =
-          await get(Uri.parse('http://localhost:8000/follows/?id=${userID}'));
-      if (followsRes.statusCode == 200) {
-        try {
-          var jsonList =
-              (json.decode(followsRes.body)).cast<Map<String, int>>();
-          var followData =
-              (jsonList['following'], jsonList['followed']) as (int, int);
-          return (profile, followData);
-        } catch (e) {
-          rethrow;
-        }
-      } else if (followsRes.statusCode == 404) {
-        return (profile, (0, 0));
->>>>>>> a3045bc021bd96dc8bfa70f1b8165c6239ebd367
       }
     } catch (e) {
       rethrow;
