@@ -19,11 +19,12 @@ class PostDisplay extends StatefulWidget {
 
 class _PostDisplayState extends State<PostDisplay> {
   bool showInfoCard = false;
+  var _isLiked = false;
 
   Future<bool> onLikeButtonTapped(bool isLiked) async {
     /// send your request here
     // final bool success= await sendRequest();
-    if (isLiked) {
+    if (!isLiked) {
       // widget.post.likes!.remove(widget.post.profileId);
       try {
         await post(Uri.parse(
@@ -43,13 +44,23 @@ class _PostDisplayState extends State<PostDisplay> {
     /// if failed, you can do nothing
     // return success? !isLiked:isLiked;
 
+    _isLiked = !_isLiked;
     return !isLiked;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _isLiked = widget.post.likes != null
+        ? widget.post.likes!
+            .map((like) => like.profileId)
+            .contains(widget.post.profileId)
+        : false;
   }
 
   @override
   Widget build(BuildContext context) {
     Post post = widget.post;
-    print(post.profileId);
     return Stack(
       children: [
         GestureDetector(
@@ -272,6 +283,7 @@ class _PostDisplayState extends State<PostDisplay> {
                           children: [
                             LikeButton(
                               size: 26,
+                              isLiked: _isLiked,
                               circleColor: CircleColor(
                                   start: Colors.orange[200]!,
                                   end: const Color.fromRGBO(255, 243, 234, 1)),
