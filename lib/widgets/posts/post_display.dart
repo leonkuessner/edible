@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:http/http.dart';
+import 'package:like_button/like_button.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:testing_flutter/models/model.dart';
 import 'package:testing_flutter/widgets/restaurants/restaurant_info_card.dart';
@@ -17,11 +19,48 @@ class PostDisplay extends StatefulWidget {
 
 class _PostDisplayState extends State<PostDisplay> {
   bool showInfoCard = false;
+  var _isLiked = false;
+
+  Future<bool> onLikeButtonTapped(bool isLiked) async {
+    /// send your request here
+    // final bool success= await sendRequest();
+    if (!isLiked) {
+      // widget.post.likes!.remove(widget.post.profileId);
+      try {
+        await post(Uri.parse(
+            "http://localhost:8000/likes?postId=${widget.post.id}&userId=${widget.post.profileId}"));
+      } catch (e) {
+        rethrow;
+      }
+    } else {
+      try {
+        await delete(Uri.parse(
+            "http://localhost:8000/likes?postId=${widget.post.id}&userId=${widget.post.profileId}"));
+      } catch (e) {
+        rethrow;
+      }
+    }
+
+    /// if failed, you can do nothing
+    // return success? !isLiked:isLiked;
+
+    _isLiked = !_isLiked;
+    return !isLiked;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _isLiked = widget.post.likes != null
+        ? widget.post.likes!
+            .map((like) => like.profileId)
+            .contains(widget.post.profileId)
+        : false;
+  }
 
   @override
   Widget build(BuildContext context) {
     Post post = widget.post;
-    print(post.profileId);
     return Stack(
       children: [
         GestureDetector(
@@ -60,8 +99,7 @@ class _PostDisplayState extends State<PostDisplay> {
                             color: const Color(0xFF55190E),
                           ),
                           const SizedBox(width: 6),
-                          Text(
-                              post.profile!.username!,
+                          Text(post.profile!.username!,
                               style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -200,6 +238,8 @@ class _PostDisplayState extends State<PostDisplay> {
                                 child: Image.network(
                               postImage.imageUrl!,
                               fit: BoxFit.cover,
+                              width: 500,
+                              height: 500,
                               loadingBuilder: (BuildContext context,
                                   Widget child,
                                   ImageChunkEvent? loadingProgress) {
@@ -238,13 +278,51 @@ class _PostDisplayState extends State<PostDisplay> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Icon(
-                              MdiIcons.heart,
-                              size: 24,
-                              color: const Color(0xFF55190E),
+                            LikeButton(
+                              size: 26,
+                              isLiked: _isLiked,
+                              circleColor: CircleColor(
+                                  start: Colors.orange[200]!,
+                                  end: const Color.fromRGBO(255, 243, 234, 1)),
+                              bubblesColor: const BubblesColor(
+                                dotPrimaryColor: Color(0xFF55190E),
+                                dotSecondaryColor: Color(0xFF55190E),
+                              ),
+                              likeBuilder: (bool isLiked) {
+                                return Icon(
+                                  isLiked
+                                      ? MdiIcons.heart
+                                      : MdiIcons.heartOutline,
+                                  color: const Color(0xFF55190E),
+                                  size: 26,
+                                );
+                              },
+                              onTap: (isLiked) => onLikeButtonTapped(isLiked),
+                              likeCount: post.likes != null
+                                  ? post.likes!.toList().length
+                                  : 0,
+                              countBuilder:
+                                  (int? count, bool isLiked, String text) {
+                                var color = const Color(0xFF55190E);
+                                Widget result;
+                                if (count == 0) {
+                                  result = Text(
+                                    "0",
+                                    style: TextStyle(color: color),
+                                  );
+                                } else {
+                                  result = Text(
+                                    text,
+                                    style: TextStyle(color: color),
+                                  );
+                                }
+                                return result;
+                              },
                             ),
-                            const SizedBox(width: 8),
+                            const SizedBox(width: 4),
                             Icon(
                               MdiIcons.commentOutline,
                               size: 24,
@@ -259,19 +337,21 @@ class _PostDisplayState extends State<PostDisplay> {
                             const SizedBox(width: 6),
                           ],
                         ),
-                        Row(
-                          children: [
-                            const SizedBox(width: 2),
-                            Text(
-                              "${post.likes} likes",
-                              style: const TextStyle(
-                                fontSize: 14,
-                                color: Color(0xFF55190E),
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        )
+                        // Row(
+                        //   children: [
+                        //     const SizedBox(width: 2),
+                        //     Text(
+                        //       post.likes != null
+                        //           ? "${post.likes!.toList().length} ${post.likes!.toList().length == 1 ? "like" : "likes"}}"
+                        //           : "0 likes",
+                        //       style: const TextStyle(
+                        //         fontSize: 14,
+                        //         color: Color(0xFF55190E),
+                        //         fontWeight: FontWeight.bold,
+                        //       ),
+                        //     ),
+                        //   ],
+                        // )
                       ]),
                 ),
                 const Divider(
@@ -279,29 +359,32 @@ class _PostDisplayState extends State<PostDisplay> {
                   thickness: 0.2,
                 ),
                 const SizedBox(height: 8),
-                Padding(
-                  padding: const EdgeInsets.only(left: 12, right: 12),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        post.review!,
-                        style: const TextStyle(
-                          fontSize: 14,
-                          color: Color(0xFF55190E),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 12, right: 12),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          post.review!,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Color(0xFF55190E),
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
+                )
               ],
             ),
           ),
         ),
         if (showInfoCard)
           RestaurantInfoCard(
-            restaurant: Restaurant(),
+            restaurant: const Restaurant(),
           ),
       ],
     );

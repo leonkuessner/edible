@@ -21,7 +21,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
         title: "edible.",
-        // home: LoginScreen());
-        home: NavPage());
+        home: LoginScreen());
+        // home: NavPage());
   }
 }
