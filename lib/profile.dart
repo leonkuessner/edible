@@ -32,7 +32,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   var _loading = true;
-  late (Profile,(int,int)) _profData;
+  late ProfData _profData;
 
   @override
   void initState() {
@@ -47,7 +47,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Future<void> _fetchProfile() async{
     var userId  = supabase.auth.currentSession?.user.id;
     var res = await fetchProfile(userId ?? "");
-    try{_setProfData(res as (Profile,(int,int)));
+    try{_setProfData(res as ProfData);
         print(res);
         setState(() => _loading = false);
     }
@@ -66,7 +66,7 @@ class _ProfilePageState extends State<ProfilePage> {
           children: [
             // Your static widgets here...
             // For example, a follow button:
-            //ProfileDashboard(),
+            ProfileDashboard(),
             _loading ?
             Center(child: CircularProgressIndicator())
             :

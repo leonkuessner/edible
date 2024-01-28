@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:testing_flutter/models/model.dart';
+import 'package:testing_flutter/models/prisma.dart';
 
 class ProfileDashboard extends StatefulWidget {
-  final Profile profile;
-
-  const ProfileDashboard(this.profile, {required UniqueKey key});
+  late ProfData profData;
+  ProfileDashboard(ProfData profData, {required UniqueKey key}){
+  }
 
   @override
   _ProfileDashboard createState() => _ProfileDashboard();
@@ -13,7 +14,7 @@ class ProfileDashboard extends StatefulWidget {
 class _ProfileDashboard extends State<ProfileDashboard> {
   @override
   Widget build(BuildContext context) {
-    Profile profile = widget.profile;
+    var (profile,(followers,following)) = widget.profData;
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -82,7 +83,7 @@ class _ProfileDashboard extends State<ProfileDashboard> {
               Column(
                 children: [
                   Text(
-                    profile.followsFollowing!.length.toString(),
+                    following.toString(),
                     style: TextStyle(
                       color: Color(0xFF55190E),
                       fontWeight: FontWeight.bold,
