@@ -83,7 +83,6 @@ class _PostDisplayState extends State<PostDisplay> {
           Uri.parse("http://localhost:8000/likes?postId=${widget.post.id}"));
       if (res.statusCode == 200) {
         setState(() {
-          print(jsonDecode(res.body)['like_count']);
           _likeCount = jsonDecode(res.body)['like_count'];
         });
       }
