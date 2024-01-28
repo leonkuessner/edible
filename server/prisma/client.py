@@ -73,7 +73,7 @@ __all__ = (
 
 log: logging.Logger = logging.getLogger(__name__)
 
-SCHEMA_PATH = Path('/Users/vinzkakilala/Desktop/dev/testing_flutter/prisma/schema.prisma')
+SCHEMA_PATH = Path('/Users/vinzkakilala/Desktop/dev/edible/prisma/schema.prisma')
 PACKAGED_SCHEMA_PATH = Path(__file__).parent.joinpath('schema.prisma')
 ENGINE_TYPE: EngineType = EngineType.binary
 BINARY_PATHS = model_parse(BinaryPaths, {'queryEngine': {'darwin': '/Users/vinzkakilala/.cache/prisma-python/binaries/5.8.0/0a83d8541752d7582de2ebc1ece46519ce72a848/node_modules/prisma/query-engine-darwin'}, 'introspectionEngine': {}, 'migrationEngine': {}, 'libqueryEngine': {}, 'prismaFmt': {}})
