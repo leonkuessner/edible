@@ -9,14 +9,19 @@ class Posts(Resource):
         params = request.args.to_dict() or {}
         db = Client()
         db.connect()
-        response = db.post.find_many(
-            where = params,
-            order = [
-                {
-                    'createdAt': 'desc'
-                }
-            ]
-        )
+        try:
+            response = db.post.find_many(
+                where = params,
+                order = [
+                    {
+                        'createdAt': 'desc'
+                    }
+                ]
+            )
+        except Exception as e:
+            db.disconnect()
+            print("params likely unsupported. Raised: ", e)
+            return jsonify({'error': 'Bad Request'}), 400
         db.disconnect()
         return jsonify([res.__dict__ for res in response])
     
@@ -41,7 +46,6 @@ class Posts(Resource):
         data = request.json
         print(data)
         response_keys = ['individual', 'review', 'rating']
-        vars = {key: data.get(key) for key in response_keys if key in data}
         db = Client()
         db.connect()
         new_restaurant = self.get_push_restaurant(data)
@@ -54,96 +58,53 @@ class Posts(Resource):
                 }
             }
         )
-        # if data['postTag'] is not None:
-        #     new_post_tag = db.posttag.create(
-        #         data = {
-        #             'post': {
-        #                 'connect': { 'id': new_post.id }
-        #             },
-        #             'profile': {
-        #                 'connect': { 'id': data['id'] }
-        #             }
-        #         }
-        #     )
-        # new_post_image = db.postimage.create({
-        #     data: {
-        #         'post': {
-        #             'connect': { 'id': new_post.id }
-        #         },
-        #         'imageUrl': { 'id': new_post.id }
-        #     }
-        # })
-        # db.profile.update(
-        #     where = { 'id': data['id'] },
-        #     data = {
-        #         'post': {
-        #             'connect': { 'id': new_post.id}
-        #         }
-        #     }
-        # )
-        
-        
-        
-        # response = db.post.create(
-        #     data=[data.get(x) for x in response_keys if x in data]
-        # )
-        # try:
-        #     for img in data.get('imageUrl'):
-        #         image = db.postimage.create({
-        #             'content': img,
-        #             'post': {
-        #                 'connect': {
-        #                     'id': response.id
-        #                 }
-        #             }
-        #         })
-        # except TypeError:
-        #     print('Image not available')
-        # try:
-        #     for t in data.get('postTag'):
-        #         tag = db.posttag.create({
-        #             'post': {
-        #                 'connect': {
-        #                     'id': response.id
-        #                 }
-        #             },
-        #             'profile': {
-        #                 'connect': {
-        #                     'id': self.getProfile(t)['id']
-        #                 }
-        #             }
-        #         })
-        # except TypeError:
-        #     print('Post Tags not available')
-            
-        # # try:
-        # #     data = db.restaurant.find_unique(
-        # #         where={
-        # #             "yelpId": data.get('yelpId')
-        # #         }
-        # #     )
-        # #     if not data:
-        # #         res = db.restaurant.create(
-        # #             content={
-        # #                 'yelpId': data.get('yelpId'),
-        # #                 'latitude': data.get('latitude'),
-        # #                 'longitude': data.get('longitude'),
-        # #             }
-        # #         )
-        # #     else:
-        # #         print("restaurant already exists in table")
-        # # except Exception as e:
-        # #     print(e)
+        if data.get('postTag') is not None:
+            new_post_tag = db.posttag.create(
+                data = {
+                    'post': {
+                        'connect': { 'id': new_post.id }
+                    },
+                    'profile': {
+                        'connect': { 'id': new_post.id }
+                    }
+                }
+            )
+        if data.get('imageUrl') is not None:
+            new_post_image = db.postimage.create(
+                data = {
+                    'post': {
+                        'connect': { 'id': new_post.id }
+                    },
+                    'imageUrl': data['imageUrl']
+                }
+            )
+        if data.get('userId') is not None:
+            db.profile.update(
+                where = { 'id': data['userId'] },
+                data = {
+                    'posts': {
+                        'connect': { 'id': new_post.id }
+                    }
+                }
+            )
+        else:
+            try:
+                db.group.update(
+                    where = { 'id': data['userId'] },
+                    data = {
+                        'posts': {
+                            'connect': { 'id': new_post.id }
+                        }
+                    } 
+                )
+            except Exception as e:
+                print('Updating group failed: ', e)
+                db.disconnect()
+                return
+
         response = db.post.find_many()
-        # # print(jsonify([res.__dict__ for res in response]))
-        print(response)
         db.disconnect()
-        # print(new_post_image)
-        # print(new_post_tag)
-        print(new_post)
-        print(new_restaurant)
-        # return jsonify([res.__dict__ for res in response])
-        return {'1':1}
+        return jsonify([res.__dict__ for res in response])
     
     def delete(self):
         params = request.args.to_dict()
@@ -156,26 +117,4 @@ class Posts(Resource):
         )
         db.disconnect()
         return deleteUser
-    
-    def getProfile(self, username):
-        db = Client()
-        db.connect()
-        response = db.profile.find_unique(
-            where={'email': username},
-            select={
-                'id': True
-            }
-        )
-        print(response)
-        db.disconnect()
-        return response
-        
-            
-        # return
-        
-# class Follow(Resource):
-#     def get(self):
-#         fo
-
-    
     
