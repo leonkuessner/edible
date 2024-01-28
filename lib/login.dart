@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:supabase_auth_ui/supabase_auth_ui.dart';
 import 'package:testing_flutter/main.dart';
+import 'package:testing_flutter/widgets/map/map_fudge.dart';
 import 'package:testing_flutter/widgets/navigation/nav.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -111,6 +112,18 @@ class _LoginScreenState extends State<LoginScreen> {
                       ]),
                 ),
               ),
+                Container(
+                margin: const EdgeInsets.only(left: 20, right: 20),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF55190E),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  child: Text("Map"),
+                  onPressed: () => {Navigator.push(context,MaterialPageRoute(builder: (context) => MyMap()))},
+                  ))
             ],
           ),
         ),

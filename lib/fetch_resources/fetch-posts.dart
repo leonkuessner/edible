@@ -36,6 +36,7 @@ import 'package:testing_flutter/models/model.dart';
 
 Future<List<Post>> fetch_posts() async {
   var res = await get(Uri.parse('http://localhost:8000/posts'));
+  print(res);
   if (res.statusCode == 200) {
     try {
       var jsonList =
