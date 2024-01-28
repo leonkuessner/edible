@@ -15,32 +15,38 @@ class FeedPage extends StatelessWidget {
   }
 }
 
-class FeedDisplay extends StatefulWidget{
+class FeedDisplay extends StatefulWidget {
   @override
   _FeedDisplayState createState() => _FeedDisplayState();
-
 }
+
 class _FeedDisplayState extends State<FeedDisplay> {
-
-  late List<Post> _mockPosts = [];
-
+  late List<Post> _fetchedPosts = [];
+  var _loaded = false;
   @override
   void initState() {
     super.initState();
-    _fetchMockPosts();
+    _fetchPosts();
   }
 
-  void _setMockPosts(newMockPosts) {
-    _mockPosts = newMockPosts;
+  void _setPosts(newPosts) {
+    _fetchedPosts = newPosts;
   }
 
-
-  Future<void> _fetchMockPosts() async{
+  Future<void> _fetchPosts() async {
     var res = await fetch_posts();
-    try{
-      setState(() {_setMockPosts(res);});
-    }
-    catch (e) {
+    try {
+      setState(() {
+        _setPosts(res);
+      });
+      print("all good");
+      _fetchedPosts.forEach((p) {
+        print(p.review);
+      });
+      setState(() {
+        _loaded = true;
+      });
+    } catch (e) {
       throw Error();
     }
   }
@@ -49,17 +55,9 @@ class _FeedDisplayState extends State<FeedDisplay> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.orange[50],
-      body: Column(
-        children: [
-          GestureDetector(onTap: () => {print(_mockPosts)}, child: FlutterLogo(size:50)),
-          Center(
-            child: PostList(
-              posts: _mockPosts,
-              index: 0,
-            ),
-          ),
-        ],
-      ),
+      body: _loaded
+          ? PostList(posts: _fetchedPosts, index: 0)
+          : Center(child: CircularProgressIndicator()),
     );
   }
 }

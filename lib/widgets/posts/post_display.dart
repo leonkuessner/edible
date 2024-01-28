@@ -21,7 +21,7 @@ class _PostDisplayState extends State<PostDisplay> {
   @override
   Widget build(BuildContext context) {
     Post post = widget.post;
-
+    print(post.profileId);
     return Stack(
       children: [
         GestureDetector(
@@ -60,7 +60,8 @@ class _PostDisplayState extends State<PostDisplay> {
                             color: const Color(0xFF55190E),
                           ),
                           const SizedBox(width: 6),
-                          Text(post.profile!.username!,
+                          Text(
+                              post.profile!.username!,
                               style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
