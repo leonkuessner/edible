@@ -74,25 +74,25 @@ class _ProfilePageState extends State<ProfilePage> {
               _profData,
               key: UniqueKey(),
             ),
-                TabBar(
-                    indicatorColor: const Color(0xFF55190E),
-                    labelColor: const Color(0xFF55190E),
-                    tabs: [
-                      const Tab(
-                          icon: Icon(
-                            Icons.grid_on,
-                            color: Color(0xFF55190E),
-                          ),
-                          text: 'your posts'),
-                      Tab(
-                          icon: Icon(
-                            MdiIcons.mapCheckOutline,
-                            color: const Color(0xFF55190E),
-                          ),
-                          text: 'map view'),
-                    ],
-                  ),
-            //ProfileDashboard(),
+            //     TabBar(
+            //         indicatorColor: const Color(0xFF55190E),
+            //         labelColor: const Color(0xFF55190E),
+            //         tabs: [
+            //           const Tab(
+            //               icon: Icon(
+            //                 Icons.grid_on,
+            //                 color: Color(0xFF55190E),
+            //               ),
+            //               text: 'your posts'),
+            //           Tab(
+            //               icon: Icon(
+            //                 MdiIcons.mapCheckOutline,
+            //                 color: const Color(0xFF55190E),
+            //               ),
+            //               text: 'map view'),
+            //         ],
+            //       ),
+            // //ProfileDashboard(),
             _loading
                 ? Center(child: CircularProgressIndicator())
                 : TabBar(
