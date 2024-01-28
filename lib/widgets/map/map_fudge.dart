@@ -39,7 +39,7 @@ class _MyMapState extends State<MyMap> {
   Future<void> fetchBusinesses() async {
     _updateCenterRadius();
     var snapshot = await get(Uri.parse(
-        'http://localhost:5000/businesses?latitude=${_centerCoordinates.latitude}&longitude=${_centerCoordinates.longitude}&radius=${min((_radius * 1000).toInt(), 40000)}'));
+        'http://localhost:8000/businesses?latitude=${_centerCoordinates.latitude}&longitude=${_centerCoordinates.longitude}&radius=${min((_radius * 1000).toInt(), 40000)}'));
     if (snapshot.statusCode == 200) {
       setState(() {
         var businesses = jsonDecode(snapshot.body);
