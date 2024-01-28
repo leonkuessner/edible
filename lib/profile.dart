@@ -28,7 +28,6 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   var _loading = true;
   late ProfData _profData;
-  late (Profile, (int, int)) _profData;
 
   @override
   void initState() {
@@ -43,17 +42,18 @@ class _ProfilePageState extends State<ProfilePage> {
   Future<void> _fetchProfile() async {
     var userId = supabase.auth.currentSession?.user.id;
     var res = await fetchProfile(userId ?? "");
-    try{_setProfData(res as ProfData);
-        print(res);
-        setState(() => _loading = false);
-    }
-    catch(e){
     try {
-      _setProfData(res as (Profile, (int, int)));
+      _setProfData(res as ProfData);
       print(res);
       setState(() => _loading = false);
     } catch (e) {
-      rethrow;
+      try {
+        _setProfData(res as (Profile, (int, int)));
+        print(res);
+        setState(() => _loading = false);
+      } catch (e) {
+        rethrow;
+      }
     }
   }
 
@@ -67,28 +67,30 @@ class _ProfilePageState extends State<ProfilePage> {
           children: [
             // Your static widgets here...
             // For example, a follow button:
-            ProfileDashboard(),
-            _loading ?
-            Center(child: CircularProgressIndicator())
-            :
-            TabBar(
-              indicatorColor: const Color(0xFF55190E),
-              labelColor: const Color(0xFF55190E),
-              tabs: [
-                const Tab(
-                    icon: Icon(
-                      Icons.grid_on,
-                      color: Color(0xFF55190E),
-                    ),
-                    text: 'your posts'),
-                Tab(
-                    icon: Icon(
-                      MdiIcons.mapCheckOutline,
-                      color: const Color(0xFF55190E),
-                    ),
-                    text: 'map view'),
-              ],
+            ProfileDashboard(
+              _profData,
+              key: UniqueKey(),
             ),
+            _loading
+                ? Center(child: CircularProgressIndicator())
+                : TabBar(
+                    indicatorColor: const Color(0xFF55190E),
+                    labelColor: const Color(0xFF55190E),
+                    tabs: [
+                      const Tab(
+                          icon: Icon(
+                            Icons.grid_on,
+                            color: Color(0xFF55190E),
+                          ),
+                          text: 'your posts'),
+                      Tab(
+                          icon: Icon(
+                            MdiIcons.mapCheckOutline,
+                            color: const Color(0xFF55190E),
+                          ),
+                          text: 'map view'),
+                    ],
+                  ),
             //ProfileDashboard(),
             _loading
                 ? Center(child: CircularProgressIndicator())
