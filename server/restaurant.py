@@ -7,9 +7,32 @@ from datetime import datetime as dt
 class ParamsException():
     pass
 
-class Restaurant(Resource):
-    def get(self):
-        user = request.args.to_dict().get('username')
+class IndividualRestaurants(Resource):
+    def get(self, user):
+        
+        db = Client()
+        db.connect()
+        response = db.post.find_many(
+            where = {
+                'id': user
+            },
+            include={
+                'yelpId': True,
+                'latitude': True,
+                'longitude': True
+            }
+        )
+        db.disconnect()
+        print(response)
+        return jsonify([res.__dict__ for res in response])
+        
+
+class AllFollowingRestaurant(Resource):
+    def get(self, user):
+        '''
+            Maybe change username to id?
+        '''
+        # user = request.args.to_dict().get('username')
         if user is None:
             raise ParamsException
         
@@ -26,8 +49,6 @@ class Restaurant(Resource):
                 'following': True
             }
         )
-        print(follow)
-        # [1,2,3,4,5]
         restaurants = db.post.find_many(
             where={
                 'profileId': {
@@ -48,20 +69,3 @@ class Restaurant(Resource):
         )
         db.disconnect()
         return result
-        
-    # def post(self):
-    #     yelpId = request.args.to_dict()['yelpId']
-    #     db = Client()
-    #     db.connect()
-    #     data = db.restaurant.find_unique(
-    #         where={
-    #             "yelpId": yelpId
-    #         }
-    #     )
-        
-    #     if data is not None:
-    #         res = db.restaurant.create(
-    #             data={}
-    #         )
-    #     db.disconnect()
-    #     pass
