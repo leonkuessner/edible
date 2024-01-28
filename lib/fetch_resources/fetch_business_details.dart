@@ -11,17 +11,14 @@ import 'dart:async';
 
 import 'package:testing_flutter/models/model.dart';
 
-
-Class RestoCardData{  
-  final double latitude,
-  final double longitude,
-  final 
-
+class RestoCardData {
+  late final double latitude;
+  late final double longitude;
 }
 
-
 Future<List<Post>> fetchBusiness() async {
-  var res = await get(Uri.parse('http://localhost:8000/details?latitude&longitude&term&price&open_now&attributes'));
+  var res = await get(Uri.parse(
+      'http://localhost:8000/details?latitude&longitude&term&price&open_now&attributes'));
   if (res.statusCode == 200) {
     try {
       var jsonList =
