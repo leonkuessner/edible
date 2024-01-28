@@ -282,7 +282,7 @@ class ProfilePage extends StatelessWidget {
             TabBar(
               tabs: [
                 Tab(icon: Icon(Icons.grid_on), text: 'Your Posts'),
-                Tab(icon: Icon(Icons.person_pin), text: 'Map View'),
+                Tab(icon: Icon(MdiIcons.mapCheckOutline), text: 'Map View'),
               ],
             ),
             Expanded(
