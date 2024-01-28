@@ -19,10 +19,10 @@ Future<(Profile,(int,int))> fetchProfile(String userID) async {
       var profile =  Profile.fromJson(jsonList[0]);
       print(profile);
       print(profile?.username);
-      var followsRes = await get(Uri.parse('http://localhost:8000/follows/?id=${userID}'));
+      var followsRes = await get(Uri.parse('http://localhost:8000/follows/${userID}'));
       if (followsRes.statusCode == 200) {
         try {
-          var jsonList = (json.decode(followsRes.body)).cast<Map<String, int>>();
+          var jsonList = (json.decode(followsRes.body));
           var followData = (jsonList['following'],jsonList['followed']) as (int,int);
           return (profile,followData);  
         } 

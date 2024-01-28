@@ -48,3 +48,20 @@ Future<List<Post>> fetch_posts() async {
   }
   throw Error();
 }
+
+
+
+Future<List<Post>> fetch_individual_posts(String userId) async {
+  var res = await get(Uri.parse('http://localhost:8000/individual-restaurant/${userId}'));
+  if (res.statusCode == 200) {
+    try {
+      var jsonList =
+          (json.decode(res.body) as List).cast<Map<dynamic, dynamic>>();
+      var jsonMapped = jsonList.map((model) => Post.fromJson(model)).toList();
+      return jsonMapped;
+    } catch (e) {
+      rethrow;
+    }
+  }
+  throw Error();
+}
