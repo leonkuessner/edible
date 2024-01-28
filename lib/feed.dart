@@ -57,7 +57,7 @@ class _FeedDisplayState extends State<FeedDisplay> {
       backgroundColor: Colors.orange[50],
       body: _loaded
           ? PostList(posts: _fetchedPosts, index: 0)
-          : CircularProgressIndicator(),
+          : Center(child: CircularProgressIndicator()),
     );
   }
 }
