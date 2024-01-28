@@ -6,7 +6,9 @@ from datetime import datetime as dt
 
 class Posts(Resource):
     def get(self):
+        print(request.args)
         params = request.args.to_dict() or {}
+        print(params)
         db = Client()
         db.connect()
         response = db.post.find_many(
@@ -17,6 +19,7 @@ class Posts(Resource):
                 }
             ]
         )
+        print(response)
         db.disconnect()
         return jsonify([res.__dict__ for res in response])
     

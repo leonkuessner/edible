@@ -11,16 +11,48 @@ import 'dart:async';
 
 import 'package:testing_flutter/models/model.dart';
 
+// Future<List<Post>> fetch_posts() async {
+//   var res = await get(Uri.parse('http://localhost:8000/posts'));
+//   print(res);
+//   if (res.statusCode == 200) {
+//     try {
+//       print(res.body);
+//       var jsonList = (json.decode(res.body) as List).cast<Map<String, dynamic>>();
+//       print(jsonList);
+//       print(jsonList[0]);
+//       print(jsonList[0].runtimeType);
+//       print(jsonList[0]['meal']);
+//       var jsonMapped =
+//           (jsonList).map((model) => Post.fromJson(model)).toList();
+//       print(jsonMapped);
+//       return jsonMapped;
+//     } catch (e) {
+//       rethrow;
+//     }
+//   }
+//   print("Other status code");
+//   throw Error();
+// }
+
 Future<List<Post>> fetch_posts() async {
   var res = await get(Uri.parse('http://localhost:8000/posts'));
-  if (res.statusCode == 200){
-    try{
-    var json = jsonDecode(res.body) as List<Post>;
-    return json;
-    }
-    catch (e){
-      throw Error();
+  print(res);
+  if (res.statusCode == 200) {
+    try {
+      print(res.body);
+      var jsonList =
+          (json.decode(res.body) as List).cast<Map<dynamic, dynamic>>();
+      print(jsonList);
+      print(jsonList[0]);
+      print(jsonList[0].runtimeType);
+      print(jsonList[0]['meal']);
+      var jsonMapped = jsonList.map((model) => Post.fromJson(model)).toList();
+      print(jsonMapped);
+      return jsonMapped;
+    } catch (e) {
+      rethrow;
     }
   }
+  print("Other status code");
   throw Error();
 }
