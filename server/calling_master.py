@@ -3,11 +3,12 @@ from flask_restful import Resource, Api
 from yelp_api import get_business, search
 import posts
 import profile
+#import likes
 import restaurant
 import follows
 from collections import defaultdict
 import os
-# from prisma import Prisma, register
+from prisma import Prisma, register
 
 '''
 Dont really know how to connect yet but placeholder innit
@@ -46,11 +47,12 @@ api.add_resource(BusinessDetails, '/details/<string:business_id>')
 # https://docs.developer.yelp.com/reference/v3_business_search
 class AllBusinesses(Resource):
     def get(self):
-        params = request.args.to_dict()
+        print("X")
+        params = request.args.to_dict() or {}
         params.setdefault('latitude', DEFAULT_LATITUDE)
         params.setdefault('longitude', DEFAULT_LONGITUDE)
         params.setdefault('radius', DEFAULT_RADIUS)
-
+        # print(params)
         return search(params)
 
 api.add_resource(AllBusinesses, '/businesses/')
@@ -59,7 +61,9 @@ api.add_resource(posts.Posts, '/posts/')
 api.add_resource(profile.Profile, '/profile/')
 api.add_resource(restaurant.Restaurant, '/restaurant/')
 api.add_resource(follows.Follows, '/follows/<string:id>')
-# api.add_resource(likes.Likes, '/likes/')
+#api.add_resource(likes.Likes, '/likes/')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port=8000, debug=True)
+
+    

@@ -23,7 +23,7 @@ class _MyMapState extends State<MyMap> {
   MapController mapController = MapController();
   LatLng _centerCoordinates = LatLng(51.509364, -0.128928);
   double _radius = 5.0;
-  dynamic _businesses = [];
+  dynamic _businesses = <dynamic>{};
   bool _isLoading = false;
   void _updateCenterRadius() {
     var bl = mapController.camera.visibleBounds.southWest;
@@ -32,17 +32,19 @@ class _MyMapState extends State<MyMap> {
     _centerCoordinates = mapController.camera.center;
   }
 
+
   void _updateBusinesses(businesses) {
-    _businesses = businesses;
+    _businesses = (Set.from(businesses)).union(Set.from(businesses));
   }
 
   Future<void> fetchBusinesses() async {
     _updateCenterRadius();
     var snapshot = await get(Uri.parse(
-        'http://localhost:5000/businesses?latitude=${_centerCoordinates.latitude}&longitude=${_centerCoordinates.longitude}&radius=${min((_radius * 1000).toInt(), 40000)}'));
+        'http://localhost:8000/businesses?latitude=${_centerCoordinates.latitude}&longitude=${_centerCoordinates.longitude}&radius=${min((_radius * 1000).toInt(), 40000)}'));
     if (snapshot.statusCode == 200) {
       setState(() {
         var businesses = jsonDecode(snapshot.body);
+        print(businesses);
         _updateBusinesses(businesses);
       });
     } else {
@@ -89,7 +91,7 @@ class _MyMapState extends State<MyMap> {
               ),
             ],
           ),
-          _businesses != []
+          _businesses != {}
               ? MarkerClusterLayerWidget(
                   options: MarkerClusterLayerOptions(
                       maxClusterRadius: 20,
@@ -97,7 +99,7 @@ class _MyMapState extends State<MyMap> {
                       alignment: Alignment.center,
                       padding: const EdgeInsets.all(50),
                       maxZoom: 15,
-                      markers: (_businesses as List<dynamic>)
+                      markers: (_businesses as Set<dynamic>).toList()
                           .map((b) => maximalBusinessMarker(context, b))
                           .toList(),
                       builder: (context, markers) {
