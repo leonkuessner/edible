@@ -67,31 +67,32 @@ class _ProfilePageState extends State<ProfilePage> {
           children: [
             // Your static widgets here...
             // For example, a follow button:
-            ProfileDashboard(
+  
+            _loading
+                ? Center(child: CircularProgressIndicator())
+                :           ProfileDashboard(
               _profData,
               key: UniqueKey(),
             ),
-            _loading
-                ? Center(child: CircularProgressIndicator())
-                : TabBar(
-                    indicatorColor: const Color(0xFF55190E),
-                    labelColor: const Color(0xFF55190E),
-                    tabs: [
-                      const Tab(
-                          icon: Icon(
-                            Icons.grid_on,
-                            color: Color(0xFF55190E),
-                          ),
-                          text: 'your posts'),
-                      Tab(
-                          icon: Icon(
-                            MdiIcons.mapCheckOutline,
-                            color: const Color(0xFF55190E),
-                          ),
-                          text: 'map view'),
-                    ],
-                  ),
-            //ProfileDashboard(),
+            //     TabBar(
+            //         indicatorColor: const Color(0xFF55190E),
+            //         labelColor: const Color(0xFF55190E),
+            //         tabs: [
+            //           const Tab(
+            //               icon: Icon(
+            //                 Icons.grid_on,
+            //                 color: Color(0xFF55190E),
+            //               ),
+            //               text: 'your posts'),
+            //           Tab(
+            //               icon: Icon(
+            //                 MdiIcons.mapCheckOutline,
+            //                 color: const Color(0xFF55190E),
+            //               ),
+            //               text: 'map view'),
+            //         ],
+            //       ),
+            // //ProfileDashboard(),
             _loading
                 ? Center(child: CircularProgressIndicator())
                 : TabBar(
