@@ -78,23 +78,10 @@ class _MyMapState extends State<MyMap> {
           TileLayer(
             urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
           ),
-          MarkerLayer(
-            markers: [
-              Marker(
-                width: 40.0,
-                height: 40.0,
-                point: _centerCoordinates, // Initial position of the marker
-                child: IconButton(
-                  icon: Icon(Icons.location_on),
-                  onPressed: () {},
-                ),
-              ),
-            ],
-          ),
           _businesses != {}
               ? MarkerClusterLayerWidget(
                   options: MarkerClusterLayerOptions(
-                      maxClusterRadius: 20,
+                      maxClusterRadius: 35,
                       size: const Size(20, 20),
                       alignment: Alignment.center,
                       padding: const EdgeInsets.all(50),

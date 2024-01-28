@@ -6,6 +6,9 @@ import 'package:intl/intl.dart';
 import 'model.dart' as _i1;
 import 'prisma.dart' as _i3;
 
+typedef ProfData = (Profile,(int,int));
+
+
 class Follow {
   const Follow({
     this.id,
