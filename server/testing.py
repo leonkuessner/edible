@@ -12,18 +12,20 @@ Calls take way too long - need a way to improve
 # content = json.loads(res.content.decode('utf-8'))
 
 # businesses = [get(f"http://localhost:5000/details/{b['id']}") for b in content]
-
+profiles = get('http://localhost:5000/profile')
 # profile = post('http://localhost:5000/profile/', data=json.dumps({'email': 'leonkuessner3@gmail.com', 'username': 'MunchMunch', 'public': True}), headers={'Content-Type': 'application/json'})
-db1 = post('http://localhost:5000/posts/', data=json.dumps({'email': 'leonkuessner3@gmail.com', 
-                                                            'individual': True, 
-                                                            'restaurantId': 'se61yyYAHdKZ_Fq9ygXjVg', 
-                                                            'review': 'Big Munch', 
-                                                            'rating': 4, 
-                                                            'imageUrl': 'https://s3-media2.fl.yelpcdn.com/bphoto/YWWcF_UIra5KEaFkdgXB6g/o.jpg',
-                                                            'latitude': '51.509865',
-                                                            'longitude': '-0.118092'
-                                                            }), 
-           headers={'Content-Type': 'application/json'})
+# for i in range(2):
+# db1 = post('http://localhost:5000/posts/', data=json.dumps({'email': f'leonkuessner3{1}@gmail.com', 
+#                                                             'individual': True, 
+#                                                             'restaurantId': 'se61yyYAHdKZ_Fq9ygXjVg', 
+#                                                             'review': 'Big Munch', 
+#                                                             'rating': 4, 
+#                                                             'imageUrl': 'https://s3-media2.fl.yelpcdn.com/bphoto/YWWcF_UIra5KEaFkdgXB6g/o.jpg',
+#                                                             'latitude': '51.509865',
+#                                                             'longitude': '-0.118092',
+#                                                             'userId': 'sdgfsdfsdgfsd'
+#                                                             }), 
+#         headers={'Content-Type': 'application/json'})
 
 # db2 = get('http://localhost:5000/posts/')
 # db3 = get('http://localhost:5000/profile/')

@@ -100,7 +100,7 @@ class Posts(Resource):
             except Exception as e:
                 print('Updating group failed: ', e)
                 db.disconnect()
-                return
+                return 
 
         response = db.post.find_many()
         db.disconnect()
