@@ -19,7 +19,11 @@ model Profile {
   email    String  @unique @db.Text
   username String  @unique @db.Text
   imageUrl String? @db.Text
+<<<<<<< HEAD
   public   Boolean @default(false)
+=======
+  public Boolean @default(true)
+>>>>>>> 69abda8a5448d04fc329282eb1c9c3158cc8e93c
 
   followsFollowing Follow[] @relation("following")
   followsFollowed  Follow[] @relation("followed")

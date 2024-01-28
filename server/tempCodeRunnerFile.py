@@ -62,4 +62,4 @@ api.add_resource(follows.Follows, '/follows/<string:id>')
 # api.add_resource(likes.Likes, '/likes/')
 
 if __name__ == '__main__':
-    app.run(port=8000, debug=True)
+    app.run(debug=True)
