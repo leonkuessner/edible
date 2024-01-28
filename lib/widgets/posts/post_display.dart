@@ -27,14 +27,14 @@ class _PostDisplayState extends State<PostDisplay> {
       // widget.post.likes!.remove(widget.post.profileId);
       try {
         await post(Uri.parse(
-            "http://localhost:8000/likes?postId=${widget.post.id}&profileId=${widget.post.profileId}"));
+            "http://localhost:8000/likes?postId=${widget.post.id}&userId=${widget.post.profileId}"));
       } catch (e) {
         rethrow;
       }
     } else {
       try {
         await delete(Uri.parse(
-            "http://localhost:8000/likes?postId=${widget.post.id}&profileId=${widget.post.profileId}"));
+            "http://localhost:8000/likes?postId=${widget.post.id}&userId=${widget.post.profileId}"));
       } catch (e) {
         rethrow;
       }
