@@ -40,15 +40,10 @@ class Likes(Resource):
             db.disconnect()
             abort(400, e)
         return
-        # return jsonify([res.model_dump(round_trip=True) for res in post])
-        # response = db.postlike.count()
-        # db.disconnect()
-        # # return post
-        # return jsonify([res.model_dump(round_trip=True) for res in response])
+    
     def delete(self):
         try:
             params = request.args.to_dict()
-            print(params)
             db = Client()
             db.connect()
             deleteLike = db.postlike.delete_many(

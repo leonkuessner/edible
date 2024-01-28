@@ -24,7 +24,8 @@ class Follows(Resource):
             abort(400, e)
         return {'following': following, 'followed': followed}
     
-    def delete(self, id1, id2):
+    def delete(self, id1):
+        id2 = request.args.to_dict().get('id2')
         try:
             db = Client()
             db.connect()

@@ -26,6 +26,7 @@ class Profile(Resource):
             db.disconnect()
             abort(400, e)
         return jsonify([res.model_dump(round_trip=True) for res in response])
+
     
     def delete(self):
         try:

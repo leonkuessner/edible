@@ -33,7 +33,6 @@ class Posts(Resource):
             db.disconnect()
             abort(400, e)
         return jsonify([res.model_dump(round_trip=True) for res in response])
-        # return jsonify([res.__dict__ for res in response])
     
     def get_push_restaurant(self, params):
         try:
@@ -65,7 +64,6 @@ class Posts(Resource):
             db = Client()
             db.connect()
             new_restaurant = self.get_push_restaurant(data)
-            print(new_restaurant)
             new_post = db.post.create(
                 data={
                     key: data.get(key) for key in response_keys if key in data

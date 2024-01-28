@@ -17,9 +17,7 @@ class IndividualRestaurants(Resource):
                     'id': user
                 },
                 include={
-                    'yelpId': True,
-                    'latitude': True,
-                    'longitude': True
+                    'restaurant': True
                 }
             )
             db.disconnect()
@@ -32,37 +30,36 @@ class IndividualRestaurants(Resource):
 class AllFollowingRestaurant(Resource):
     def get(self, user):
         try:
-            if user is None:
-                raise ParamsException
+            # if user is None:
+            #     raise ParamsException
             
             db = Client()
             db.connect()
             follow = db.profile.find_many(
                 where={
-                    'username': user
+                    'id': user
                 },
                 include={
-                    'followsFollowing': True
+                    'followsFollowing': {
+                        'include': {
+                            'following': True
+                        }
+                    }
                 },
-                select={
-                    'following': True
-                }
             )
+            # follow = db.profile.select(where={'id': user}).followsFollowing()
+            follows = sum([x.followsFollowing for x in follow], [])
             restaurants = db.post.find_many(
                 where={
                     'profileId': {
-                        'in': follow
+                        'in': [x.following.id for x in follows]
                     }
                 },
-                select={
-                    'restaurantId': True
-                }
             )
-            print(restaurants)
             result = db.restaurant.find_many(
                 where={
                     'yelpId': {
-                        'in': restaurants
+                        'in': [x.restaurantId for x in restaurants]
                     }
                 }
             )
@@ -70,4 +67,4 @@ class AllFollowingRestaurant(Resource):
         except Exception as e:
             db.disconnect()
             abort(400, e)
-        return result
+        return jsonify([res.model_dump(round_trip=True) for res in result])

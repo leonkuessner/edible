@@ -48,12 +48,10 @@ api.add_resource(BusinessDetails, '/details/<string:business_id>')
 # https://docs.developer.yelp.com/reference/v3_business_search
 class AllBusinesses(Resource):
     def get(self):
-        print("X")
         params = request.args.to_dict() or {}
         params.setdefault('latitude', DEFAULT_LATITUDE)
         params.setdefault('longitude', DEFAULT_LONGITUDE)
         params.setdefault('radius', DEFAULT_RADIUS)
-        # print(params)
         return search(params)
 
 api.add_resource(AllBusinesses, '/businesses/')
