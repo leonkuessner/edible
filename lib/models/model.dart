@@ -1,6 +1,7 @@
 library prisma.namespace.model; // ignore_for_file: no_leading_underscores_for_library_prefixes
 
 import 'package:orm/orm.dart' as _i2;
+import 'package:intl/intl.dart';
 
 import 'model.dart' as _i1;
 import 'prisma.dart' as _i3;
@@ -425,8 +426,10 @@ class Post {
         profileId: json['profileId'],
         review: json['review'],
         rating: json['rating'],
-        createdAt: json['createdAt'],
-        updatedAt: json['updatedAt'],
+        createdAt: DateFormat("E, dd MMM yyyy HH:mm:ss 'GMT'")
+            .parse(json['createdAt']),
+        updatedAt: DateFormat("E, dd MMM yyyy HH:mm:ss 'GMT'")
+            .parse(json['updatedAt']),
         restaurant: json['restaurant'] is Map
             ? _i1.Restaurant.fromJson(json['restaurant'])
             : null,

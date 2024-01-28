@@ -11,14 +11,17 @@ class PostList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScrollablePositionedList.builder(
-      initialScrollIndex: index,
-      itemCount: posts.length,
-      itemBuilder: (BuildContext context, int i) {
-        return Padding(
-            padding: const EdgeInsets.all(16),
-            child: PostDisplay(posts[i], key: UniqueKey()));
-      },
-    );
+    return posts != []
+        ? ScrollablePositionedList.builder(
+            initialScrollIndex: index,
+            itemCount: posts.length,
+            itemBuilder: (BuildContext context, int i) {
+              print(i < posts.length);
+              return Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: PostDisplay(posts[i], key: UniqueKey()));
+            },
+          )
+        : SizedBox.shrink();
   }
 }
