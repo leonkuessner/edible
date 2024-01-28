@@ -9,9 +9,22 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'dart:async';
 
-Future<Response> fetch_posts(){
-  return get(Uri.parse('http://localhost:5000/posts'));
+import 'package:testing_flutter/models/model.dart';
+
+Future<List<Post>> fetch_posts() async {
+  var res = await get(Uri.parse('http://localhost:5000/posts'));
+  if (res.statusCode == 200){
+    try{
+    var json = jsonDecode(res.body) as List<Post>;
+    return json;
+    }
+    catch (e){
+      throw Error();
+    }
+  }
+  throw Error();
 }
+
 
 class ApiTest extends StatefulWidget{
   const ApiTest({super.key});
