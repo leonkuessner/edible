@@ -31,5 +31,5 @@ Calls take way too long - need a way to improve
 # db2 = get('http://localhost:8000/likes?postId=9247449d-235b-4805-94e5-e2d41fb44c29')
 # db3 = delete('http://localhost:8000/likes?postId=9247449d-235b-4805-94e5-e2d41fb44c29&userId=5442b175-1f99-4d24-9a32-e698f38083d7')
 # db4 = get('http://localhost:8000/follows/5b79591c-52d0-45c0-8a20-06e6cdcbd9b4')
-print('rawr')
+print('testing successful')
 # pprint.pprint(businesses, indent=2)

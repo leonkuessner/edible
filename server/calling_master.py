@@ -6,6 +6,7 @@ import profile
 import likes
 import restaurant
 import follows
+import comments
 from collections import defaultdict
 import os
 from prisma import Prisma, register
@@ -47,12 +48,10 @@ api.add_resource(BusinessDetails, '/details/<string:business_id>')
 # https://docs.developer.yelp.com/reference/v3_business_search
 class AllBusinesses(Resource):
     def get(self):
-        print("X")
         params = request.args.to_dict() or {}
         params.setdefault('latitude', DEFAULT_LATITUDE)
         params.setdefault('longitude', DEFAULT_LONGITUDE)
         params.setdefault('radius', DEFAULT_RADIUS)
-        # print(params)
         return search(params)
 
 api.add_resource(AllBusinesses, '/businesses/')
@@ -63,6 +62,7 @@ api.add_resource(restaurant.AllFollowingRestaurant, '/all-following-restaurant/<
 api.add_resource(restaurant.IndividualRestaurants, '/individual-restaurant/<string:user>')
 api.add_resource(follows.Follows, '/follows/<string:id>')
 api.add_resource(likes.Likes, '/likes/')
+api.add_resource(comments.Comments, '/comments/')
 
 if __name__ == '__main__':
     app.run(port=8000, debug=True)

@@ -1,5 +1,5 @@
 from flask_restful import Resource, Api
-from flask import request, jsonify
+from flask import request, jsonify, abort
 from prisma.models import Post
 from prisma.client import Client
 from datetime import datetime as dt
@@ -9,63 +9,62 @@ class ParamsException():
 
 class IndividualRestaurants(Resource):
     def get(self, user):
-        
-        db = Client()
-        db.connect()
-        response = db.post.find_many(
-            where = {
-                'id': user
-            },
-            include={
-                'yelpId': True,
-                'latitude': True,
-                'longitude': True
-            }
-        )
-        db.disconnect()
-        print(response)
+        try:
+            db = Client()
+            db.connect()
+            response = db.post.find_many(
+                where = {
+                    'id': user
+                },
+                include={
+                    'restaurant': True
+                }
+            )
+            db.disconnect()
+        except Exception as e:
+            db.disconnect()
+            abort(400, e)
         return jsonify([res.model_dump(round_trip=True) for res in response])
         
 
 class AllFollowingRestaurant(Resource):
     def get(self, user):
-        '''
-            Maybe change username to id?
-        '''
-        # user = request.args.to_dict().get('username')
-        if user is None:
-            raise ParamsException
-        
-        db = Client()
-        db.connect()
-        follow = db.profile.find_many(
-            where={
-                'username': user
-            },
-            include={
-                'followsFollowing': True
-            },
-            select={
-                'following': True
-            }
-        )
-        restaurants = db.post.find_many(
-            where={
-                'profileId': {
-                    'in': follow
+        try:
+            # if user is None:
+            #     raise ParamsException
+            
+            db = Client()
+            db.connect()
+            follow = db.profile.find_many(
+                where={
+                    'id': user
+                },
+                include={
+                    'followsFollowing': {
+                        'include': {
+                            'following': True
+                        }
+                    }
+                },
+            )
+            # follow = db.profile.select(where={'id': user}).followsFollowing()
+            follows = sum([x.followsFollowing for x in follow], [])
+            restaurants = db.post.find_many(
+                where={
+                    'profileId': {
+                        'in': [x.following.id for x in follows]
+                    }
+                },
+            )
+            result = db.restaurant.find_many(
+                where={
+                    'yelpId': {
+                        'in': [x.restaurantId for x in restaurants]
+                    }
                 }
-            },
-            select={
-                'restaurantId': True
-            }
-        )
-        print(restaurants)
-        result = db.restaurant.find_many(
-            where={
-                'yelpId': {
-                    'in': restaurants
-                }
-            }
-        )
-        db.disconnect()
-        return result
+            )
+            db.disconnect()
+        except Exception as e:
+            db.disconnect()
+            abort(400, e)
+        return jsonify([res.model_dump(round_trip=True) for res in result])

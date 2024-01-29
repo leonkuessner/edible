@@ -73,10 +73,10 @@ __all__ = (
 
 log: logging.Logger = logging.getLogger(__name__)
 
-SCHEMA_PATH = Path('/Users/ayaanmather/Documents/flutter-work/edible-1/prisma/schema.prisma')
+SCHEMA_PATH = Path('/Users/vinzkakilala/Desktop/dev/edible/prisma/schema.prisma')
 PACKAGED_SCHEMA_PATH = Path(__file__).parent.joinpath('schema.prisma')
 ENGINE_TYPE: EngineType = EngineType.binary
-BINARY_PATHS = model_parse(BinaryPaths, {'queryEngine': {'darwin-arm64': '/Users/ayaanmather/.cache/prisma-python/binaries/5.8.0/0a83d8541752d7582de2ebc1ece46519ce72a848/node_modules/prisma/query-engine-darwin-arm64'}, 'introspectionEngine': {}, 'migrationEngine': {}, 'libqueryEngine': {}, 'prismaFmt': {}})
+BINARY_PATHS = model_parse(BinaryPaths, {'queryEngine': {'darwin': '/Users/vinzkakilala/.cache/prisma-python/binaries/5.8.0/0a83d8541752d7582de2ebc1ece46519ce72a848/node_modules/prisma/query-engine-darwin'}, 'introspectionEngine': {}, 'migrationEngine': {}, 'libqueryEngine': {}, 'prismaFmt': {}})
 
 RegisteredClient = Union['Prisma', Callable[[], 'Prisma']]
 _registered_client: Optional[RegisteredClient] = None
@@ -575,7 +575,7 @@ class Prisma:
     def _default_datasource(self) -> DatasourceOverride:
         return {
             'name': 'db',
-            'url': OptionalValueFromEnvVar(**{'value': 'postgres://postgres.jcehshqlyqsdoxerdbrn:EBAvuxP5vTjEe4QD@aws-0-eu-west-2.pooler.supabase.com:6543/postgres?pgbouncer=true&connection_limit=1', 'fromEnvVar': None}).resolve(),
+            'url': OptionalValueFromEnvVar(**{'value': None, 'fromEnvVar': 'DATABASE_URL'}).resolve(),
         }
 
 

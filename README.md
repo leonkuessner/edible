@@ -1,3 +1,3 @@
-# testing flutter
+# edible.
 
-a cheeky flutter project.
+a social dining hub.

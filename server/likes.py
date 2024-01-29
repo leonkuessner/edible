@@ -1,58 +1,62 @@
 from flask_restful import Resource, Api
-from flask import request, jsonify
+from flask import request, jsonify, abort
 from prisma.client import Client
 
 
 class Likes(Resource):
     def get(self):
-        id = request.args.to_dict().get('postId')
-        print(id)
-        db = Client()
-        db.connect()
-        response = db.postlike.count(
-            where={
-                'postId': id
-            }
-        )
-        db.disconnect()
+        try:
+            id = request.args.to_dict().get('postId')
+            db = Client()
+            db.connect()
+            response = db.postlike.count(
+                where={
+                    'postId': id
+                }
+            )
+            db.disconnect()
+        except Exception as e:
+            db.disconnect()
+            abort(400, e)
         return {'like_count': response}
     
     def post(self):
-        params = request.args.to_dict()
-        
-        db = Client()
-        db.connect()
-        post = db.postlike.create(
-            data = {
-                'post': {
-                    'connect': { 'id': params.get('postId') }
-                },
-                'profile': {
-                    'connect': { 'id': params.get('userId') }
+        try:
+            params = request.args.to_dict()
+            db = Client()
+            db.connect()
+            post = db.postlike.create(
+                data = {
+                    'post': {
+                        'connect': { 'id': params.get('postId') }
+                    },
+                    'profile': {
+                        'connect': { 'id': params.get('userId') }
+                    }
                 }
-            }
-        )
-        db.disconnect()
-        print(post)
+            )
+            db.disconnect()
+        except Exception as e:
+            db.disconnect()
+            abort(400, e)
         return
-        # return jsonify([res.model_dump(round_trip=True) for res in post])
-        # response = db.postlike.count()
-        # db.disconnect()
-        # # return post
-        # return jsonify([res.model_dump(round_trip=True) for res in response])
+    
     def delete(self):
-        params = request.args.to_dict()
-        print(params)
-        db = Client()
-        db.connect()
-        deleteLike = db.postlike.delete_many(
-            where = {
-                'AND': [
-                    {'postId': params.get('postId')},
-                    {'profileId': params.get('userId')}
-                ]
-            }
-        )
-        db.disconnect()
+        try:
+            params = request.args.to_dict()
+            db = Client()
+            db.connect()
+            deleteLike = db.postlike.delete_many(
+                where = {
+                    'AND': [
+                        {'postId': params.get('postId')},
+                        {'profileId': params.get('userId')}
+                    ]
+                }
+            )
+            db.disconnect()
+        except Exception as e:
+            db.disconnect()
+            abort(400, e)
         return 
         

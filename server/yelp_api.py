@@ -4,6 +4,7 @@ import pprint
 import requests
 from urllib.parse import quote
 import pydash
+from flask import abort
 
 
 API_KEY= 'x97eD7KK0A1KgmzDQgnEfMAR7FdEDhqyvw_QcWfo_TsoFlyzZvujR6B-zCFgQMPVU9Ymqj9kKiUkVw-JXOeqfYodNaXDpoz9lYHFHJJAQ3L8N0IYNIJ3YxQLSyGwZXYx'
@@ -25,9 +26,10 @@ def request(host, path, api_key, url_params=None):
     }
 
     print(u'Querying {0} ...'.format(url))
-
-    response = requests.request('GET', url, headers=headers, params=url_params)
-
+    try:
+        response = requests.request('GET', url, headers=headers, params=url_params)
+    except Exception as e:
+        abort(400, e)
     return response.json()
 
 
@@ -37,7 +39,6 @@ def search_url(params):
         params: All the commands from the GET request
     Returns: A filtered json for BASIC data
     '''
-    print("y")
     url_params = {key: value.replace(' ', '+') for key, value in params.items()}
     url_params.setdefault('limit', SEARCH_LIMIT)
     x = request(API_HOST, SEARCH_PATH, API_KEY, url_params=url_params)
@@ -77,7 +78,6 @@ def get_business(business_id):
 def search(params):
     
     res = search_url(params)['businesses']
-    print(res)
     '''
     Filtering to be done, lets clear it up later
     '''
