@@ -14,14 +14,13 @@ Future<(Profile, (int, int))> fetchProfile(String userID) async {
     try {
       var jsonList =
           (json.decode(profileRes.body) as List).cast<Map<dynamic, dynamic>>();
-      var profile = Profile.fromJson(jsonList[0]);
-      print(profile);
-      print(profile?.username);
+      var profile = Profile.fromJson(jsonList[0]);;
       var followsRes = await get(Uri.parse('http://localhost:8000/follows/${userID}'));
       if (followsRes.statusCode == 200) {
         try {
           var jsonList = (json.decode(followsRes.body));
           var followData = (jsonList['following'],jsonList['followed']) as (int,int);
+          print(profile.username);
           return (profile,followData);  
         } 
         catch (e) {

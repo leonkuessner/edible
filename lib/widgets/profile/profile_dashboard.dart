@@ -130,7 +130,7 @@ class _ProfileDashboard extends State<ProfileDashboard> {
           ),
           Padding(
             padding: const EdgeInsets.only(
-                top: 4, left: 130, right: 130, bottom: 16),
+                top: 4, left: 110, right: 110, bottom: 16),
             child: ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
@@ -145,8 +145,7 @@ class _ProfileDashboard extends State<ProfileDashboard> {
                         Icons.edit,
                         color: Color(0xFF55190E), // Set text color to brown
                       ),
-                      const SizedBox(
-                          width: 8), // Add space between icon and text
+                   // Add space between icon and text
                       Text(
                         'edit profile',
                         style: TextStyle(

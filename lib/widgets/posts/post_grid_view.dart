@@ -7,8 +7,8 @@ import 'package:testing_flutter/widgets/posts/post_list.dart';
 import '../posts/post_display.dart';
 
 class PostGridView extends StatefulWidget {
-  final userId;
-  const PostGridView({String? this.userId, Key? key}) : super(key: key);
+  final postsX;
+  const PostGridView(List<Post> this.postsX, { Key? key}) : super(key: key);
 
   @override
   State<PostGridView> createState() => _PostGridViewState();
@@ -16,39 +16,12 @@ class PostGridView extends StatefulWidget {
 
 class _PostGridViewState extends State<PostGridView> {
 
- late List<Post> _fetchedPosts = [];
-  var _loaded = false;
-  @override
-  void initState() {
-    super.initState();
-    _fetchPosts();
-  }
-
-  void _setPosts(newPosts) {
-    _fetchedPosts = newPosts;
-  }
-
-  Future<void> _fetchPosts() async {
-    var res = await fetch_individual_posts(widget.userId);
-    try {
-      print(res);
-      setState(() {
-        _setPosts(res);
-      });
-      print("all good");
-      setState(() {
-        _loaded = true;
-      });
-    } catch (e) {
-      throw Error();
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: GridView.builder(
-        itemCount: _fetchedPosts.length,
+        itemCount: widget.postsX.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
           childAspectRatio: 1,
@@ -65,13 +38,13 @@ class _PostGridViewState extends State<PostGridView> {
                           backgroundColor: Colors.orange[50],
                           appBar: NavAppBar(),
                           body: PostList(
-                            posts: _fetchedPosts,
+                            posts: widget.postsX,
                             index: index,
                           )),
                     ));
               },
               child: Image.network(
-                _fetchedPosts[index].postImages!.first.imageUrl! ,
+                (widget.postsX[index].postImages?.first?.imageUrl) ?? "" ,
                 fit: BoxFit.cover,
               ),
             ),

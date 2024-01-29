@@ -52,7 +52,7 @@ Future<List<Post>> fetch_posts() async {
 
 
 Future<List<Post>> fetch_individual_posts(String userId) async {
-  var res = await get(Uri.parse('http://localhost:8000/individual-restaurant/${userId}'));
+  var res = await get(Uri.parse('http://localhost:8000/profile/${userId}'));
   if (res.statusCode == 200) {
     try {
       var jsonList =

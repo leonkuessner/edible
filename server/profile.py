@@ -17,6 +17,9 @@ class Profile(Resource):
                 'postLikes': True,
                 'posts': {
                     'include': {
+                        'postImages': True,
+                        'comments': True,
+                        'profile': True,
                         'restaurant': True
                     }
                 }

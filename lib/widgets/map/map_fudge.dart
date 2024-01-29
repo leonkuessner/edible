@@ -32,6 +32,10 @@ class _MyMapState extends State<MyMap> {
     _centerCoordinates = mapController.camera.center;
   }
 
+  @override
+  void initState() {
+    fetchBusinesses();
+  } 
 
   void _updateBusinesses(businesses) {
     _businesses = (Set.from(_businesses)).union(Set.from(businesses));

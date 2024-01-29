@@ -60,7 +60,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
+    return _loading ? Container( alignment:Alignment.center, decoration: BoxDecoration(color: Colors.orange[50]), child: CircularProgressIndicator(color: Color(0xFF55190E),),) : (DefaultTabController(
       length: 2,
       child: Scaffold(
         backgroundColor: Colors.orange[50],
@@ -70,7 +70,7 @@ class _ProfilePageState extends State<ProfilePage> {
             // For example, a follow button:
   
             _loading
-                ? Center(child: CircularProgressIndicator())
+                ? SizedBox.shrink()
                 :           ProfileDashboard(
               _profData,
               key: UniqueKey(),
@@ -95,7 +95,7 @@ class _ProfilePageState extends State<ProfilePage> {
             //       ),
             // //ProfileDashboard(),
             _loading
-                ? Center(child: CircularProgressIndicator())
+                ? (SizedBox.shrink())
                 : TabBar(
                     indicatorColor: const Color(0xFF55190E),
                     labelColor: const Color(0xFF55190E),
@@ -114,18 +114,19 @@ class _ProfilePageState extends State<ProfilePage> {
                           text: 'map view'),
                     ],
                   ),
-            Expanded(
-              child: TabBarView(
-                children: [
-                  const PostGridView(), // Replace with your actual PostGridView
-                  MyMap(), // Replace with your actual MapView
+                  _loading ? SizedBox.shrink() :
+                  Expanded(
+                    child: TabBarView(
+                      children: [
+                        PostGridView((_profData.$1.posts!.toList())), // Replace with your actual PostGridView
+                        MyMap(), // Replace with your actual MapView
                 ],
               ),
             ),
           ],
         ),
       ),
-    );
+    ));
   }
 }
 

@@ -25,6 +25,7 @@ class Posts(Resource):
                 'restaurant': True
             }
         )
+        print(response)
         # res = [dict(item) for item in response]
         # print(jsonify([res.__dict__ for res in response]))
         db.disconnect()
