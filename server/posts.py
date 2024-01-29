@@ -11,22 +11,19 @@ class Posts(Resource):
         params = request.args.to_dict() or {}
         db = Client()
         db.connect()
-        response = db.post.find_many(
-            where = params,
-            order = [
-                {
-                    'createdAt': 'desc'
-                }
-            ], 
-            include = {
-                'postImages': True,
-                'comments': True,
-                'profile': True,
-                'restaurant': True
-            }
-        )
-        # res = [dict(item) for item in response]
-        # print(jsonify([res.__dict__ for res in response]))
+        try:
+            response = db.post.find_many(
+                where = params,
+                order = [
+                    {
+                        'createdAt': 'desc'
+                    }
+                ]
+            )
+        except Exception as e:
+            db.disconnect()
+            print("params likely unsupported. Raised: ", e)
+            return jsonify({'error': 'Bad Request'}), 400
         db.disconnect()
         if response is None:
             return {}
@@ -89,7 +86,6 @@ class Posts(Resource):
                     'imageUrl': data['imageUrl']
                 }
             )
-        
         if data.get('userId') is not None:
             db.profile.update(
                 where = { 'id': data['userId'] },

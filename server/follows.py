@@ -5,22 +5,24 @@ from prisma.client import Client
 from datetime import datetime as dt
 
 class Follows(Resource):
-    def get(self, id):
+    def get(self, user):
         db = Client()
         db.connect()
         following = db.follow.count(
             where={
-                'followingId': id
+                'followingId': user
             }
         )
         followed = db.follow.count(
             where={
-                'followedId': id
+                'followedId': user
             }
         )
+        db.disconnect()
         return {'following': following, 'followed': followed}
     
-    def delete(self, id1, id2):
+    def delete(self, id1):
+        id2 = request.args.to_dict()['unfollowed_id']
         db = Client()
         db.connect()
         response = db.follow.delete(
@@ -29,4 +31,5 @@ class Follows(Resource):
                 'followedId': id2
             }
         )
+        db.disconnect()
         pass

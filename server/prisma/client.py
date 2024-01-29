@@ -575,7 +575,7 @@ class Prisma:
     def _default_datasource(self) -> DatasourceOverride:
         return {
             'name': 'db',
-            'url': OptionalValueFromEnvVar(**{'value': 'postgres://postgres.jcehshqlyqsdoxerdbrn:EBAvuxP5vTjEe4QD@aws-0-eu-west-2.pooler.supabase.com:6543/postgres?pgbouncer=true&connection_limit=1', 'fromEnvVar': None}).resolve(),
+            'url': OptionalValueFromEnvVar(**{'value': None, 'fromEnvVar': 'DATABASE_URL'}).resolve(),
         }
 
 
