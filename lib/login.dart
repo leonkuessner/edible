@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:supabase_auth_ui/supabase_auth_ui.dart';
 import 'package:testing_flutter/main.dart';
-import 'package:testing_flutter/widgets/map/map_fudge.dart';
 import 'package:testing_flutter/widgets/navigation/nav.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
